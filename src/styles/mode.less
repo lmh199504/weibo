@@ -1,0 +1,40 @@
+
+// 白天色
+@bgColor-daily: #F7F8FA;
+@textColor-daily: #333333;
+@subTextColor-daily: #666666;
+@tipsColor-daily: #CCCCCC;
+@errorColor-daily: #EE6560;
+ 
+// 夜间色
+@bgColor-dark: #171B30;
+@textColor-dark: #FFFFFF;
+@subTextColor-dark: rgba(255, 255, 255, 0.6);
+@tipsColor-dark: rgba(255, 255, 255, 0.4);
+ 
+ 
+// 模式切换
+.styleChange(@theme) {
+  // 定义页面显示各种颜色，拼接 theme 主题
+  @bgColor: "bgColor-@{theme}";
+  @textColor: "textColor-@{theme}";
+  @subTextColor: "subTextColor-@{theme}";
+  @tipsColor: "tipsColor-@{theme}";
+ 
+  width: 100%;
+  background: @@bgColor; // 使用 @@style 双@的方法取值
+}
+ 
+// 白天模式
+.test {
+  .styleChange(daily); // 执行less 函数
+}
+ 
+// 夜间模式
+.test-dark {
+  .styleChange(dark); // 执行less函数，传入 dark ，表示夜间
+}
+
+html,body {
+  min-height: 100%;
+}
