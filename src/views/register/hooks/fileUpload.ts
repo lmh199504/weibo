@@ -5,7 +5,8 @@ interface FileItem {
   uid: string;
   name?: string;
   status?: string;
-  response?: string;
+  // eslint-disable-next-line
+  response?: any;
   url?: string;
   type?: string;
   size: number;
@@ -18,11 +19,6 @@ interface FileInfo {
   fileList: FileItem[];
 }
 
-function getBase64(img: Blob, callback: (base64Url: string) => void) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result as string));
-  reader.readAsDataURL(img);
-}
 
 
 
@@ -36,11 +32,9 @@ export const handleChange = (info: FileInfo):void => {
 	return;
   }
   if (info.file.status === 'done') {
-	// Get this url from response in real world.
-	getBase64(info.file.originFileObj, (base64Url: string) => {
-		imageUrl.value = base64Url;
-		loading.value = false;
-	});
+
+	imageUrl.value = String(info?.file?.response?.data.url);
+	loading.value = false;
   }
   if (info.file.status === 'error') {
 	loading.value = false;

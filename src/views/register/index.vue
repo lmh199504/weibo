@@ -4,8 +4,8 @@
 		
 		<div class="register_box">
 			<h3 class="register_title">{{ $t('login.register') }}</h3>
-			<a-upload v-model:file-list="fileList" name="avatar" list-type="picture-card" class="avatar-uploader"
-				:show-upload-list="false" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+			<a-upload v-model:file-list="fileList" list-type="picture-card" class="avatar-uploader"
+				:show-upload-list="false" action="/api/uploadimg"
 				:before-upload="beforeUpload" @change="handleChange">
 				<img v-if="imageUrl" :src="imageUrl" alt="avatar" />
 				<div v-else>
@@ -40,7 +40,7 @@
 				<a-form-item>
 					<a-button type="primary" html-type="submit" class="login_btn"
 						:disabled="disabled">
-						{{ $t('login.login') }}
+						{{ $t('login.register') }}
 					</a-button>
 				</a-form-item>
 			</a-form>
@@ -73,8 +73,10 @@
 		handleFinishFailed
 	} from './hooks/index'
 	import LangBtn from '@/components/switchLangBtn/index.vue'
-	import { reqRegister } from '@/api'
-	import { setToken } from '@/utils/cookies'
+	import {
+		useStore
+	} from "@/store";
+	import { useRouter } from 'vue-router'
 	export default defineComponent({
 		components: {
 			LoadingOutlined,
@@ -88,26 +90,23 @@
 			const disabled = computed(() => {
 				return (formState.user && formState.password && imageUrl.value && formState.repassword) ? false : true
 			})
-			
-			
+			const store = useStore()
+			const router = useRouter()
 			// 滑动事件
 			const handleSlide = (flag: boolean): void => {
 				isSlideSuccess.value = flag
 				showSlide.value = false
-				reqRegister({
+				
+				store.dispatch('userModule/register', {
 					header: imageUrl.value,
 					username: formState.user,
 					password: formState.password,
 					repassword: formState.repassword
 				})
-				.then(res => {
-					console.log(res)
-					setToken(res.data.token)
+				.then(() => {
+					router.replace('/') 
 				})
-				.catch(err => {
-					console.log(err)
-				})
-				
+
 			}
 
 			return {

@@ -1,10 +1,12 @@
 
 <template>
-    <a-spin :spinning="loading" :tip="$t('loading')">
-        <div class="full_loading">
-            
+    
+        <div class="full_loading" v-show="loading">
+            <a-spin :spinning="loading" :tip="$t('loading')" class="loading">
+				
+			</a-spin>
         </div>
-    </a-spin>
+    
 </template>
 
 <script lang="ts">
@@ -14,7 +16,9 @@ export default defineComponent({
     setup() {
         const store = useStore()
         const loading = computed(() => store.state.settingModule.loading)
-        
+        return {
+			loading
+		}
     },
 })
 </script>
@@ -28,4 +32,10 @@ export default defineComponent({
         left: 0;
         background: rgba(0, 0, 0, 0.5); 
     }
+	.loading{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
 </style>

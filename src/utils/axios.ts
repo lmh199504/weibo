@@ -66,7 +66,7 @@ instance.interceptors.response.use(
             case 1:
                 // 根据errorCode，对业务做异常处理(和后端约定)
                 message.error(response?.data?.resMsg);
-                
+                return Promise.reject(response?.data?.resMsg)
                 break;
             default:
                 break;

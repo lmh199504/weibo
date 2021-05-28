@@ -3,7 +3,7 @@ import { Module } from 'vuex'
 import RootStateTypes from '@/store/interface'
 import UserModuleTypes from '@/store/modules/user/interface'
 import { setToken, getToken, removeToken } from '@/utils/cookies'
-import { reqLogin, reqGetUserInfo } from '@/api'
+import { reqLogin, reqGetUserInfo, reqRegister } from '@/api'
 const userModule: Module<UserModuleTypes, RootStateTypes> = {
     namespaced: true,
     state: {
@@ -73,6 +73,23 @@ const userModule: Module<UserModuleTypes, RootStateTypes> = {
                 })
             })
         },
+		register({ commit }, registerData) {
+			return new Promise((resolve, reject) => {
+				reqRegister(registerData)
+				.then(response => {
+					const { data } = response
+					commit('SET_TOKEN', data.token)
+					commit('SET_AVATAR', data.headerImg)
+					commit('SET_ID', data._id)
+					commit('SET_USERNAME',data.username)
+					setToken(data.token)
+					resolve(data)
+				})
+				.catch(err => {
+					reject(err)
+				})
+			})
+		}
     }
 }
 
