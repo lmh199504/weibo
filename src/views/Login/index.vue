@@ -4,6 +4,7 @@
 			<LangBtn />
 		</div>
 		<div class="login_box">
+			<h3 class="login_title">{{ $t('login.login') }}</h3>
 			<a-form :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed">
 				<a-form-item>
 					<a-input v-model:value="formState.user" :placeholder="$t('login.username')">
@@ -26,7 +27,8 @@
 					</a-button>
 				</a-form-item>
 			</a-form>
-			<span class="to_register_btn" @click="toRegister">{{ $t('login.register') }}</span>
+			
+			<span class="to_register_btn" @click="toRegister">没有账号？{{ $t('login.register') }}</span>
 		</div>
 		<slideLock @handleSlide="handleSlide" v-if="showSlide"></slideLock>
 	</div>

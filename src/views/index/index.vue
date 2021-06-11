@@ -1,9 +1,10 @@
 <template>
 	<div>
-		<div>首页</div>
-		<div>{{ $t('title.home')}}</div>
-		<a-range-picker v-model:value="value3" />
-
+		<div class="home_content"></div>
+		<div class="nav">
+			
+		</div>
+		
 	</div>
 </template>
 
@@ -18,7 +19,6 @@
 	export default defineComponent({
 		name: 'Index',
 		setup() {
-
 			return {
 				value3: ref < Moment[] > ([]),
 				value1: ref('中文'),
