@@ -11,7 +11,6 @@ export {
 	isSlideSuccess,
 	showSlide,
 	formState,
-	handleFinish,
-	handleFinishFailed
+	handleFinishFailed,
 } from './formData'
 

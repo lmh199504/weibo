@@ -21,10 +21,7 @@ export const formState: UnwrapRef < FormState > = reactive({
 	password: '',
 	repassword: ''
 });
-export const handleFinish = (values: FormState):void => {
-	console.log(values, formState);
-	showSlide.value = true
-};
+
 export const handleFinishFailed = (errors: ValidateErrorEntity < FormState > ):void => {
 	console.log(errors);
 };

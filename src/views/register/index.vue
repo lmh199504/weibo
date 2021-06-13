@@ -44,8 +44,8 @@
 					</a-button>
 				</a-form-item>
 			</a-form>
+			<span class="to_register_btn" @click="toLogin">已有账号？{{ $t('login.login') }}</span>
 		</div>
-		<slideLock @handleSlide="handleSlide" v-if="showSlide"></slideLock>
 	</div>
 </template>
 <script lang="ts">
@@ -59,7 +59,7 @@
 	import {
 		defineComponent, computed
 	} from 'vue';
-	import slideLock from '@/components/slideLock/index.vue'
+
 	import {
 		fileList,
 		loading,
@@ -69,21 +69,25 @@
 		isSlideSuccess,
 		showSlide,
 		formState,
-		handleFinish,
-		handleFinishFailed
+		handleFinishFailed,
+
 	} from './hooks/index'
 	import LangBtn from '@/components/switchLangBtn/index.vue'
 	import {
 		useStore
 	} from "@/store";
 	import { useRouter } from 'vue-router'
+	interface FormState {
+		user: string;
+		password: string;
+		repassword: string;
+	}
 	export default defineComponent({
 		components: {
 			LoadingOutlined,
 			PlusOutlined,
 			UserOutlined,
 			LockOutlined,
-			slideLock,
 			LangBtn
 		},
 		setup() {
@@ -92,11 +96,9 @@
 			})
 			const store = useStore()
 			const router = useRouter()
-			// 滑动事件
-			const handleSlide = (flag: boolean): void => {
-				isSlideSuccess.value = flag
-				showSlide.value = false
-				
+
+			const handleFinish = (values: FormState):void => {
+				console.log(values, formState);
 				store.dispatch('userModule/register', {
 					header: imageUrl.value,
 					username: formState.user,
@@ -106,12 +108,13 @@
 				.then(() => {
 					router.replace('/') 
 				})
-
+			};
+			
+			const toLogin = () => {
+				router.push('/login')
 			}
-
 			return {
 				disabled,
-				handleSlide,
 				fileList,
 				loading,
 				imageUrl,
@@ -121,7 +124,8 @@
 				showSlide,
 				formState,
 				handleFinish,
-				handleFinishFailed
+				handleFinishFailed,
+				toLogin
 			};
 		},
 	});

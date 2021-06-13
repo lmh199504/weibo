@@ -32,9 +32,14 @@ export const handleChange = (info: FileInfo):void => {
 	return;
   }
   if (info.file.status === 'done') {
-
-	imageUrl.value = String(info?.file?.response?.data.url);
-	loading.value = false;
+	if(info.file.response.code == 0) {
+		imageUrl.value = String(info?.file?.response?.data.url);
+		loading.value = false;
+	} else {
+		loading.value = false;
+		console.log(info.file.response.resMsg)
+	}
+	
   }
   if (info.file.status === 'error') {
 	loading.value = false;

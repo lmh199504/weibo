@@ -19,9 +19,9 @@
 	export default defineComponent({
 		name: 'Index',
 		setup() {
+			
 			return {
-				value3: ref < Moment[] > ([]),
-				value1: ref('中文'),
+				
 			}
 		}
 	})

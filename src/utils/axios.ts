@@ -14,6 +14,7 @@ interface PendingType {
     cancel(): void;
 }
 
+import { getToken } from './cookies'
 // 取消重复请求
 const pending: Array<PendingType> = [];
 const CancelToken = axios.CancelToken;
@@ -50,6 +51,11 @@ instance.interceptors.request.use(
         request.cancelToken = new CancelToken((c) => {
             pending.push({ url: request.url, method: request.method, params: request.params, data: request.data, cancel: c });
         });
+		console.log(getToken())
+		if(getToken()) {
+			request.headers['authorization'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+		}
+		
         return request;
     },
     error => {

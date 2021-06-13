@@ -30,7 +30,6 @@
 			
 			<span class="to_register_btn" @click="toRegister">没有账号？{{ $t('login.register') }}</span>
 		</div>
-		<slideLock @handleSlide="handleSlide" v-if="showSlide"></slideLock>
 	</div>
 </template>
 
@@ -54,7 +53,7 @@
 		user: string;
 		password: string;
 	}
-	import slideLock from "@/components/slideLock/index.vue";
+
 	import LangBtn from '@/components/switchLangBtn/index.vue'
 	import {
 		useStore
@@ -63,6 +62,7 @@
 	export default defineComponent({
 		name: "Login",
 		setup() {
+			const router = useRouter()
 			const store = useStore();
 			const formState: UnwrapRef < FormState > = reactive({
 				user: "",
@@ -74,16 +74,6 @@
 			//
 			const handleFinish = (values: FormState) => {
 				console.log(values, formState);
-				showSlide.value = true;
-			};
-			const handleFinishFailed = (errors: ValidateErrorEntity < FormState > ) => {
-				console.log(errors);
-			};
-			let isSlideSuccess: Ref < boolean > = ref(false);
-			let showSlide: Ref < boolean > = ref(false);
-			const handleSlide = (flag: boolean) => {
-				isSlideSuccess.value = flag;
-				showSlide.value = false;
 				loading.value = true;
 				store
 					.dispatch("userModule/login", {
@@ -92,15 +82,22 @@
 					})
 					.then(() => {
 						loading.value = false;
+						router.replace('/')
 					})
 					.catch(() => {
-						loading.value;
+						loading.value = false;
 					});
 			};
+			const handleFinishFailed = (errors: ValidateErrorEntity < FormState > ) => {
+				console.log(errors);
+			};
+			let isSlideSuccess: Ref < boolean > = ref(false);
+			let showSlide: Ref < boolean > = ref(false);
+
 			
 			
 			// 去登录
-			const router = useRouter()
+			
 			const toRegister = () => router.push('/register')
 			
 			return {
@@ -109,7 +106,6 @@
 				formState,
 				handleFinish,
 				handleFinishFailed,
-				handleSlide,
 				loading,
 				toRegister
 			};
@@ -117,7 +113,6 @@
 		components: {
 			UserOutlined,
 			LockOutlined,
-			slideLock,
 			LangBtn
 		},
 	});
