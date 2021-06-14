@@ -1,0 +1,151 @@
+
+.nav-header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 48px;
+	border-top: 2px solid #fa7d3c;
+	box-shadow: 0 0 1px 0px rgba(0,0,0,0.15);
+	background: #fff;
+	.gn_header{
+		position: relative;
+		width: 1000px;
+		height: 48px;
+		margin: 0 auto;
+	}
+	.gn_logo{
+		float: left;
+		position: relative;
+		width: 140px;
+		height: 48px;
+		left: auto;
+		top: auto;
+		margin: 0;
+		background: none;
+		.box{
+			width: 190px;
+			height: 48px;
+			cursor: pointer;
+			position: absolute;
+			left: -50px;
+			top: 0;
+			.logo{
+				    display: block;
+				    margin-left: 50px;
+				    width: 140px;
+				    height: 48px;
+				    cursor: pointer;
+				    background: url(../../assets/images/WB_logo.png) no-repeat 0 40%;
+			}
+		}
+	}
+	.search-box{
+		float: left;
+		height: 100%;
+		position: relative;
+		width: 428px;
+		.searchInput{
+			margin: auto;
+			position: absolute;
+			width: 100%;
+			top: 50%;
+			transform: translateY(-50%);
+			.searchIcon{
+				cursor: pointer;
+				font-size: 18px;
+			}
+			.searchIcon:hover{
+				color: #ff8140;
+			}
+		}
+		.searchResult{
+			width: 100%;
+			position: absolute;
+			top: calc(100% - 4px);
+			left: 0;
+			z-index: 9998;
+			background: #fff;
+			color: #333;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			padding: 2px;
+			box-shadow: 0px 2px 8px 1px rgba(0,0,0,0.2);
+			min-height: 100px;
+		}
+		
+	}
+	.gn_position {
+	    float: right;
+	    margin-left: -11px;
+		height: 100%;
+		.gn_nav{
+			// height: 100%;
+			float: left;
+			// margin: 11px 20px 11px 0;
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
+			.gn_nav_list{
+				list-style: none;
+				margin: auto;
+				// height: 100%;
+				li {
+					cursor: pointer;
+					float: left;
+					padding: 0 5px;
+					font-size: 14px;
+					// height: 100%;
+					// line-height: 48px;
+					
+					color: #333;
+					span{
+						margin-left: 5px;
+					}
+					a{
+						color: #333;
+					}
+					a:hover{
+						color: #ff8140;
+					}
+				}
+				li:hover{
+					color: #ff8140;
+				}
+				.S_line1{
+					height: 20px;
+					border-left-width: 1px;
+					border-left-style: solid;
+					width: 0;
+					overflow: hidden;
+					border-color: #d9d9d9;
+					padding: 0;
+				}
+			}
+		}
+		.gn_login{
+			margin-left: 20px;
+		}
+	}
+	.lang_btn{
+		float: left;
+		// height: 100%;
+		position: relative;
+		top: 50%;
+		transform:translateY(-50%);
+	}
+}
+.global_nav_alpha {
+    box-shadow: 0 0 1px 0px rgba(0,0,0,0.3), 0 0 6px 2px rgba(0,0,0,0.15);
+    background: rgba(255,255,255,0.94);
+}
+
+@media screen and (min-width: 1295px) {
+	.nav-header {
+		.gn_header {
+			    width: 1280px;
+			}
+		}
+	}
+	

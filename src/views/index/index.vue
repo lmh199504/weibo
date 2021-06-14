@@ -1,7 +1,12 @@
 <template>
 	<div>
-		<div class="home_content"></div>
 		<div class="nav">
+			<NavHeader />
+		</div>
+		<div class="home_content">
+			<div class="WB_frame">
+				<router-view></router-view>
+			</div>
 			
 		</div>
 		
@@ -9,13 +14,10 @@
 </template>
 
 <script lang="ts">
+	import NavHeader from '@/components/navHeader/navHeader.vue'
 	import {
-		defineComponent,
-		ref
+		defineComponent
 	} from 'vue'
-	import {
-		Moment
-	} from 'moment';
 	export default defineComponent({
 		name: 'Index',
 		setup() {
@@ -23,8 +25,12 @@
 			return {
 				
 			}
+		},
+		components: {
+			NavHeader
 		}
 	})
 </script>
-<style>
+<style lang="less" scoped>
+	@import './index.less';
 </style>

@@ -29,6 +29,7 @@ export default defineComponent({
 </script>
 
 <style lang="less">
+	// @import '~ant-design-vue/dist/antd.less'; // 引入官方提供的 less 样式入口文件
 	#app {
 		min-height: 100%;
 	}

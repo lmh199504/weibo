@@ -28,7 +28,7 @@
 				</a-form-item>
 			</a-form>
 			
-			<span class="to_register_btn" @click="toRegister">没有账号？{{ $t('login.register') }}</span>
+			<span class="to_register_btn" @click="toRegister">{{ $t('login.noaccount') }}{{ $t('login.register') }}</span>
 		</div>
 	</div>
 </template>

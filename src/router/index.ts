@@ -5,7 +5,30 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Index',
-    component: Index
+    component: Index,
+	redirect: 'index',
+	children: [
+		{
+			path: 'game',
+			name: 'Game',
+			component: () => import('@/views/game/game.vue')
+		},
+		{
+			path:'index',
+			name: 'Home',
+			component: () => import('@/views/home/home.vue')
+		},
+		{
+			path:'video',
+			name: 'Video',
+			component: () => import('@/views/videoPage/videoPage.vue')
+		},
+		{
+			path: 'find',
+			name: 'Find',
+			component: () => import('@/views/find/find.vue')
+		}
+	]
   },
   {
     path: '/login',
@@ -15,6 +38,7 @@ const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "login" */ '../views/Login/index.vue')
   },
+  
   {
     path: '/register',
     name: 'Register',

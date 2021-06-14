@@ -11,8 +11,14 @@ module.exports = {
     password: 'password',
     repassword: 'Confirm password',
     username: 'username',
-    register: "Register"
+    register: "Register",
+	noaccount:'No Account?'
   },
   upload_header: "Upload Header",
-  loading: 'loading...'
+  loading: 'loading...',
+  searchPlaceHolder: 'Please enter search content.',
+  home: 'Home',
+  find: 'Find',
+  game: 'Game',
+  video: 'Video'
 }
