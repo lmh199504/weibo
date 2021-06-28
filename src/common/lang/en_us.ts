@@ -12,7 +12,8 @@ module.exports = {
     repassword: 'Confirm password',
     username: 'username',
     register: "Register",
-	noaccount:'No Account?'
+	noaccount:'No Account?',
+	logout: 'logout'
   },
   upload_header: "Upload Header",
   loading: 'loading...',

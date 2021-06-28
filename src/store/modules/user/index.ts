@@ -52,18 +52,19 @@ const userModule: Module<UserModuleTypes, RootStateTypes> = {
             commit('SET_ID', '')
             commit('SET_USERNAME','')
             removeToken()
+			return Promise.resolve()
         },
 
         // get user info
-        getInfo({ commit, state }) {
+        getInfo({ commit }, token) {
             return new Promise((resolve, reject) => {
-                reqGetUserInfo({token: state.token }).then(response => {
+                reqGetUserInfo({token: token }).then(response => {
                     const { data } = response
                     if (!data) {
                         reject('Verification failed, please Login again.')
                     }
                     const {  username, headerImg, _id } = data
-                    commit('SET_NAME', username)
+                    commit('SET_USERNAME', username)
                     commit('SET_AVATAR', headerImg)
                     commit("SET_ID", _id)
 

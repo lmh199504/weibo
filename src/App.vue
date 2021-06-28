@@ -5,12 +5,13 @@
 	</a-config-provider>
 </template>
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, created } from 'vue'
 import { useStore } from '@/store'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import enUS from 'ant-design-vue/es/locale/en_US'
 import 'moment/dist/locale/zh-cn';
 import fullLoading from '@/components/full_loading'
+import { getToken } from '@/utils/cookies'
 export default defineComponent({
 	name: 'App',
 	components: {
@@ -24,6 +25,14 @@ export default defineComponent({
 			zhCN,
 			lang
 		}
+	},
+	created() {
+		const store = useStore()
+		const token = getToken()
+		if(token) {
+			store.dispatch('userModule/getInfo', token)
+		}
+		
 	}
 })
 </script>

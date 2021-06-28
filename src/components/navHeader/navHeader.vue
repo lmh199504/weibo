@@ -63,8 +63,18 @@
 						</li>
 					</ul>
 				</div>
-				<div class="gn_nav" v-else>
-					{{ username }}
+				<div class="gn_nav gn_login" v-else>
+					<ul class="gn_nav_list clearfix">
+						<li class="username">
+							{{ username }}
+						</li>
+						<li class="user_header">
+							<img :src="header" alt="">
+						</li>
+						<li>
+							<a-button @click="logOut">{{ $t('login.logout') }}</a-button>
+						</li>
+					</ul>
 				</div>
 
 				<div class="lang_btn">
@@ -83,13 +93,17 @@
 	import { SearchOutlined, HomeOutlined, VideoCameraOutlined,CompassOutlined, AppstoreAddOutlined } from '@ant-design/icons-vue'
 	import langBtn from '@/components/switchLangBtn/index.vue'
 	import { useStore } from '@/store'
+	import { message } from 'ant-design-vue'
+	message.config({
+		top: '300px'
+	})
 	export default defineComponent({
 		name: 'NavHeader',
 		setup() {
 			const store = useStore()
 
 			const username = computed(() => store.state.userModule.username)
-
+			const header = computed(() => store.state.userModule.header)
 			let seachValue: Ref<string> = ref('');
 			
 
@@ -97,11 +111,20 @@
 			const changeSearch = ():void => {
 				console.log(seachValue.value)
 			}
+			// 退出登录
+			const logOut = () => {
+				store.dispatch('userModule/logout')
+				.then(() => {
+					message.success("退出成功")
+				})
+			}
 			
 			return {
 				seachValue,
 				changeSearch,
-				username
+				username,
+				header,
+				logOut
 			}
 		},
 		components: {
