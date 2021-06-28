@@ -48,7 +48,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="gn_nav gn_login">
+				<div class="gn_nav gn_login" v-if="!username">
 					<ul class="gn_nav_list clearfix">
 						<li>
 							<router-link to="/login">
@@ -63,6 +63,10 @@
 						</li>
 					</ul>
 				</div>
+				<div class="gn_nav" v-else>
+					{{ username }}
+				</div>
+
 				<div class="lang_btn">
 					<langBtn />
 				</div>
@@ -75,12 +79,17 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, Ref } from 'vue'
+	import { defineComponent, ref, Ref, computed } from 'vue'
 	import { SearchOutlined, HomeOutlined, VideoCameraOutlined,CompassOutlined, AppstoreAddOutlined } from '@ant-design/icons-vue'
 	import langBtn from '@/components/switchLangBtn/index.vue'
+	import { useStore } from '@/store'
 	export default defineComponent({
 		name: 'NavHeader',
 		setup() {
+			const store = useStore()
+
+			const username = computed(() => store.state.userModule.username)
+
 			let seachValue: Ref<string> = ref('');
 			
 
@@ -91,7 +100,8 @@
 			
 			return {
 				seachValue,
-				changeSearch
+				changeSearch,
+				username
 			}
 		},
 		components: {

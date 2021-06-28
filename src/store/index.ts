@@ -8,6 +8,7 @@ import settingModule from '@/store/modules/settings'
 //  用户
 import userModule from '@/store/modules/user'
 
+
 export default createStore<RootStateTypes>({
   state: {
     test: ''
