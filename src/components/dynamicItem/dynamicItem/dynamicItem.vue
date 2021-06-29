@@ -1,17 +1,26 @@
 
 <template>
 	<div class="DynamicItem">
-		<imgDynamic />
+		<imgDynamic v-if="num>0.5" />
+		<videoDynamic v-else/>
 	</div>
 </template>
 
 <script lang="ts">
-	import { defineComponent } from 'vue'
+	import { defineComponent, ref } from 'vue'
 	import imgDynamic from '../imgDynamic/imgDynamic.vue'
+	import videoDynamic from '../videoDynamic/videoDynamic.vue'
 	export default defineComponent({
 		name: 'DynamicItem',
+		setup() {
+			const num = ref(Math.random())
+			return {
+				num
+			}
+		},
 		components: {
-			imgDynamic
+			imgDynamic,
+			videoDynamic
 		}
 	})
 </script>
