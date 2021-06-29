@@ -3,11 +3,42 @@
 		<!-- 左侧导航 -->
 		<div class="left_menu">
 			<ul class="left_menu_ul">
-				<li :class="activeId==item.id ? 'active_li':''" v-for="item in menuList" :key="item.id" @click="tapMenu(item)">{{ item.name }}</li>
+				<li :class="activeId==item.id ? 'active_li':''" v-for="item in menuList" :key="item.id"
+					@click="tapMenu(item)">{{ item.name }}</li>
 			</ul>
 		</div>
 		<!-- 中间区域 -->
 		<div class="main-content">
+			<!-- 顶部轮播 -->
+			<div>
+				<a-carousel arrows autoplay>
+					<template #prevArrow>
+						<div class="custom-slick-arrow" style="left: 10px;z-index: 1;">
+							<left-circle-outlined />
+						</div>
+					</template>
+					<template #nextArrow>
+						<div class="custom-slick-arrow" style="right: 10px">
+							<right-circle-outlined />
+						</div>
+					</template>
+					<div>
+						<h3>1</h3>
+					</div>
+					<div>
+						<h3>2</h3>
+					</div>
+					<div>
+						<h3>3</h3>
+					</div>
+					<div>
+						<h3>4</h3>
+					</div>
+				</a-carousel>
+			</div>
+			<!-- 一条动态 -->
+			<DynamicItem v-for="(item,index) in dynamicList" :key="index"/>
+
 			<div style="background-color: red;"></div>
 		</div>
 		<!-- 右侧 -->
@@ -16,19 +47,26 @@
 		</div>
 	</div>
 </template>
-
 <script lang="ts">
 	interface menuItem {
 		name: string;
 		id: number;
 	}
+	// 动态 
+	import DynamicItem from '@/components/dynamicItem/dynamicItem/dynamicItem.vue'
 
-
-	import { defineComponent, reactive, ref } from 'vue'
+	import {
+		LeftCircleOutlined,
+		RightCircleOutlined
+	} from '@ant-design/icons-vue';
+	import {
+		defineComponent,
+		reactive,
+		ref
+	} from 'vue'
 	export default defineComponent({
 		setup() {
-			var menuList = reactive([
-				{
+			var menuList = reactive([{
 					name: '热门',
 					id: 1
 				},
@@ -73,18 +111,48 @@
 					id: 11
 				}
 			])
-			var activeId = ref<number>(1)
+			var activeId = ref < number > (1)
 
 			// 点击菜单
 			const tapMenu = (item: menuItem) => {
 				activeId.value = item.id
 			}
 
+			// 动态列表
+			var dynamicList = reactive([
+				{
+					type: 'img',
+					imgLength: 7
+				}, {
+					type: 'img',
+					imgLength: 8
+				},{
+					type: 'video'
+				},{
+					type: 'video'
+				},{
+					type: 'video'
+				},{
+					type: 'img',
+					imgLength: 7
+				},{
+					type: 'img',
+					imgLength: 7
+				}
+			])
+		
+			
 			return {
 				activeId,
 				menuList,
-				tapMenu
+				tapMenu,
+				dynamicList
 			}
+		},
+		components: {
+			LeftCircleOutlined,
+			RightCircleOutlined,
+			DynamicItem
 		}
 	})
 </script>

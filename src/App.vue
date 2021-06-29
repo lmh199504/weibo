@@ -5,7 +5,7 @@
 	</a-config-provider>
 </template>
 <script>
-import { defineComponent, computed, created } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from '@/store'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import enUS from 'ant-design-vue/es/locale/en_US'
