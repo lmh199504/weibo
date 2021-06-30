@@ -7,7 +7,8 @@ import RootStateTypes, { AllStateTypes } from '@/store/interface'
 import settingModule from '@/store/modules/settings'
 //  用户
 import userModule from '@/store/modules/user'
-
+// 视频
+import videoModule from '@/store/modules/videos'
 
 export default createStore<RootStateTypes>({
   state: {
@@ -19,7 +20,8 @@ export default createStore<RootStateTypes>({
   },
   modules: {
     settingModule,
-    userModule
+    userModule,
+    videoModule
   }
 })
 

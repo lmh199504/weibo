@@ -34,11 +34,15 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, onMounted, computed } from 'vue'
-	import { formatVideoTime, Screen } from '@/utils/index'
+	import { defineComponent, ref, onMounted, computed, watch } from 'vue'
+	import { formatVideoTime, Screen, createRandomId } from '@/utils/index'
+	import { useStore } from '@/store'
+	
 	export default defineComponent({
 		name: "videoPlayer",
 		setup() {
+			const store = useStore()
+			const uid = createRandomId()
 			// 时长
 			const duration = ref<number>(0)
 			// 当前时间
@@ -70,7 +74,6 @@
 					// eslint-disable-next-line
 					(videoplayer.value as any)['volume'] = volume.value / 100
 				})
-
 			})
 			// 播放视频
 			const playVideo = () => {
@@ -78,6 +81,7 @@
 				(videoplayer.value as any)['play']()
 				isInit.value = false
 				isPlay.value = true
+				store.commit('videoModule/SET_VIDEO_ID', uid)
 			}
 			// 暂停播放
 			const pauseVideo = () => {
@@ -97,6 +101,17 @@
 			// 过滤当前时间
 			const filterCurrentTime = computed(() => {
 				return formatVideoTime(currentTime.value)
+			})
+			
+			var currentId = computed(() => {
+				return store.state.videoModule.videoId
+			})
+
+			watch(currentId, (newValue) => {
+				if(newValue != uid) {
+					pauseVideo()
+					isInit.value = true
+				}
 			})
 
 			return {

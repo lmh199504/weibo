@@ -6,7 +6,6 @@
         </div>
         <div class="right">
             <div class="content_text">之前C罗在新闻发布会上把可乐挪走的行为话题度爆棚。现在C罗被淘汰出局，可乐的“报复”机会来了！</div>
-            
             <dynamicFooter />
         </div>
     </div>
