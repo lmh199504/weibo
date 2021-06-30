@@ -28,15 +28,10 @@
 </template>    
 
 <script lang="ts">
-    import { createFromIconfontCN } from '@ant-design/icons-vue';
+
     import { defineComponent }  from 'vue'
-    const IconFont = createFromIconfontCN({
-        scriptUrl: '//at.alicdn.com/t/font_2641377_zil2s5rr0d.js',
-    });
     export default defineComponent({
-        components: {
-            IconFont
-        }
+
     })
 </script>
 
