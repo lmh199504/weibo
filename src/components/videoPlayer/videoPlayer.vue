@@ -20,7 +20,8 @@
 				<a-slider v-model:value="volume" @change="onChange" />
 			</div>
 			<div>
-				<icon-font type="icon-shengyinjingyin" class="icon"/>
+				<icon-font type="icon-shengyinjingyin" class="icon" v-if="volume==0" @click="onChange(30)"/>
+				<icon-font type="icon-volume" class="icon" v-else @click="onChange(0)"/>	
 			</div>
 			<div class="videoTime">
 				{{ filterCurrentTime }}/{{ filterDuration }}
@@ -50,10 +51,12 @@
 
 			// 声音
 			const volume = ref<number>(30)
+			// eslint-disable-next-line
 			const onChange = (value: number):void => {
-				// console.log(value)
 				// eslint-disable-next-line
 				(videoplayer.value as any)['volume'] = value / 100
+
+				volume.value = value
 			}
 			// 是否播放中
 			const isPlay = ref<boolean>(false)
