@@ -47,7 +47,12 @@
 		</div>
 		<!-- 右侧 -->
 		<div class="right_content">
-			<div style="background-color: green;"></div>
+			<div class="pl_unlogin_home_login">
+				<div class="UG_box">
+					<LoginBox />
+				</div>	
+				
+			</div>		
 		</div>
 		<!-- 回到顶部 -->
 		<a-back-top />
@@ -60,7 +65,7 @@
 	}
 	// 动态 
 	import DynamicItem from '@/components/dynamicItem/dynamicItem/dynamicItem.vue'
-
+	import LoginBox from '@/components/loginBox/loginBox.vue'
 	import {
 		LeftCircleOutlined,
 		RightCircleOutlined
@@ -193,7 +198,8 @@
 		components: {
 			LeftCircleOutlined,
 			RightCircleOutlined,
-			DynamicItem
+			DynamicItem,
+			LoginBox
 		}
 	})
 </script>
