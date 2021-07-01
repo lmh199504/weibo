@@ -38,13 +38,19 @@
 			</div>
 			<!-- 一条动态 -->
 			<DynamicItem v-for="(item,index) in dynamicList" :key="index"/>
-
-			<div style="background-color: red;"></div>
+			<div v-if="loading">
+				<a-spin tip="Loading...">
+					<div class="spin-content">
+					</div>
+				</a-spin>
+			</div>
 		</div>
 		<!-- 右侧 -->
 		<div class="right_content">
 			<div style="background-color: green;"></div>
 		</div>
+		<!-- 回到顶部 -->
+		<a-back-top />
 	</div>
 </template>
 <script lang="ts">
@@ -62,7 +68,9 @@
 	import {
 		defineComponent,
 		reactive,
-		ref
+		ref,
+		onMounted,
+		onUnmounted
 	} from 'vue'
 	export default defineComponent({
 		setup() {
@@ -140,13 +148,46 @@
 					imgLength: 7
 				}
 			])
-		
 			
+			// 加载动态列表
+
+			const loading = ref<boolean>(false)
+			const getList = () => {
+
+				if(loading.value == true) {
+					return
+				}
+				loading.value = true
+				setTimeout(() => {
+					dynamicList.push({
+						type: 'img',
+						imgLength: 7
+					})
+					loading.value = false
+				}, 1500)
+				
+			}
+
+			const handleScroll = () => {
+				const wScrollY = window.scrollY;	// 当前滚动条top值  
+				const wInnerH = window.innerHeight;	// 设备窗口的高度
+				const bScrollH = document.body.scrollHeight;	// body总高度   
+				if (wScrollY + wInnerH >= bScrollH-10) {       
+					getList()
+				}
+			}
+			onMounted(() => {
+				window.addEventListener('scroll', handleScroll)
+			})
+			onUnmounted(() => {
+				window.removeEventListener('scroll', handleScroll)
+			})
 			return {
 				activeId,
 				menuList,
 				tapMenu,
-				dynamicList
+				dynamicList,
+				loading
 			}
 		},
 		components: {
