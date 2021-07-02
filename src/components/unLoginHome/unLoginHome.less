@@ -77,11 +77,36 @@
 	}
 	.right_content{
 		width: 340px;
+		position: relative;
 		.pl_unlogin_home_login{
 			.UG_box{
 				background-color: #f2f2f5;
 				padding: 20px;
 				margin-bottom: 20px;
+			}
+		}
+		.fix {
+			position: fixed;
+			width: 340px;
+		}
+		.pl_unlogin_home_topic{
+			border-top: 2px solid #fa2f2f;
+			.UG_box{
+				background-color: #f2f2f5;
+				padding: 20px;
+				// margin-bottom: 20px;
+			}
+			.check_more{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-top: 1px solid #d9d9d9;
+				padding: 5px;
+				background-color: #f2f2f5;
+				cursor: pointer;
+				&:hover{
+					color: #eb7350;
+				}
 			}
 		}
 	}

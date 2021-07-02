@@ -13,7 +13,9 @@ module.exports = {
     username: 'username',
     register: "Register",
 	noaccount:'No Account?',
-	logout: 'logout'
+	logout: 'logout',
+	accountLogin: 'Account Login',
+	safeLogin: 'Safe Login'
   },
   upload_header: "Upload Header",
   loading: 'loading...',

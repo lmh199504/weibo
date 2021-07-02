@@ -13,6 +13,8 @@ module.exports = {
     register: '注册',
     noaccount: '没有账号？',
     logout: '退出',
+	accountLogin: '账号登录',
+	safeLogin: '安全登录'
   },
   upload_header: "上传头像",
   loading: '加载中...',

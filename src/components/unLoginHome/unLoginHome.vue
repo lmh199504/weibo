@@ -47,12 +47,20 @@
 		</div>
 		<!-- 右侧 -->
 		<div class="right_content">
-			<div class="pl_unlogin_home_login">
+			<div class="pl_unlogin_home_login" :class="{ 'fix': fix }">
 				<div class="UG_box">
 					<LoginBox />
 				</div>	
-				
-			</div>		
+			</div>
+			<div class="pl_unlogin_home_topic">
+				<div class="UG_box">
+					<HotTopic />
+				</div>
+				<div class="check_more">
+					<div>查看更多</div>
+					<icon-font type="icon-xiangyou"></icon-font>
+				</div>
+			</div>
 		</div>
 		<!-- 回到顶部 -->
 		<a-back-top />
@@ -66,6 +74,8 @@
 	// 动态 
 	import DynamicItem from '@/components/dynamicItem/dynamicItem/dynamicItem.vue'
 	import LoginBox from '@/components/loginBox/loginBox.vue'
+	// 热点话题
+	import HotTopic from '@/components/unLoginHome/hotTopicBox/hotTopicBox.vue'
 	import {
 		LeftCircleOutlined,
 		RightCircleOutlined
@@ -172,13 +182,19 @@
 				}, 1500)
 				
 			}
-
+			const fix = ref<boolean>(false)
 			const handleScroll = () => {
 				const wScrollY = window.scrollY;	// 当前滚动条top值  
 				const wInnerH = window.innerHeight;	// 设备窗口的高度
 				const bScrollH = document.body.scrollHeight;	// body总高度   
 				if (wScrollY + wInnerH >= bScrollH-10) {       
 					getList()
+				}
+				
+				if(wScrollY > 900) {
+					fix.value = true
+				} else {
+					fix.value = false	
 				}
 			}
 			onMounted(() => {
@@ -192,14 +208,16 @@
 				menuList,
 				tapMenu,
 				dynamicList,
-				loading
+				loading,
+				fix
 			}
 		},
 		components: {
 			LeftCircleOutlined,
 			RightCircleOutlined,
 			DynamicItem,
-			LoginBox
+			LoginBox,
+			HotTopic
 		}
 	})
 </script>
