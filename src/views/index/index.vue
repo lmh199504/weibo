@@ -4,10 +4,7 @@
 			<NavHeader />
 		</div>
 		<div class="home_content">
-			<div class="WB_frame">
-				<router-view></router-view>
-			</div>
-			
+			<router-view></router-view>
 		</div>
 		
 	</div>

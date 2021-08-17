@@ -6,7 +6,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Index',
     component: Index,
-	redirect: 'index',
+	redirect: 'home',
 	children: [
 		{
 			path: 'game',
@@ -14,9 +14,56 @@ const routes: Array<RouteRecordRaw> = [
 			component: () => import('@/views/game/game.vue')
 		},
 		{
-			path:'index',
+			path:'home',
 			name: 'Home',
-			component: () => import('@/views/home/home.vue')
+			component: () => import('@/views/home/home.vue'),
+			children: [
+				{
+					path: 'index',
+					name: '首页的首页',
+					component: () => import('@/views/home/index/index.vue')
+				},
+				{
+					path: 'myPraise',
+					name: '我的赞',
+					component: () => import('@/views/home/myPraise/index.vue')
+				},
+				{
+					path: 'myCollection',
+					name: '我的收藏',
+					component: () => import('@/views/home/myCollection/index.vue')
+				},
+				{
+					path: 'hotWeiBo',
+					name: '热门微博',
+					component: () => import('@/views/home/hotWeibo/index.vue')
+				},
+				{
+					path: 'hotVideo',
+					name: '热门视频',
+					component: () => import('@/views/home/hotVideo/index.vue')
+				},
+				{
+					path: 'newWeiBo',
+					name: '最新微博',
+					component: () => import('@/views/home/newWeiBo/index.vue')
+				},
+				{
+					path: 'friends',
+					name: '好友圈',
+					component: () => import('@/views/home/friendQuan/index.vue')
+				},
+				{
+					path: 'specialAttention',
+					name: '特别关注',
+					component: () => import('@/views/home/specialAttention/index.vue')
+				},
+				{
+					path: 'exclusive',
+					name: '专属微博',
+					component: () => import('@/views/home/exclusiveWeiBo/index.vue')
+				}
+			]
 		},
 		{
 			path:'video',
@@ -64,6 +111,15 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css' // progress bar style
+router.beforeEach((to, from, next) => {
+	NProgress.start()
+	next()
+	NProgress.done()
 })
 
 export default router

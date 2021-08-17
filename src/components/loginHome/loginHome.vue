@@ -1,14 +1,41 @@
 
 <template>
-	<div>
-		我是已经登录的首页
+	<div class="loginHome">
+		<div class="WB_miniblog">
+			<div class="WB_frame">
+				<div class="left">
+					<LeftMenu />
+				</div>
+				<div class="main">
+					<router-view />
+				</div>
+				<div class="right">
+					
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
 	import { defineComponent } from 'vue'
+	import LeftMenu from '@/components/leftMenu/index.vue'
+	import { useRouter,onBeforeRouteUpdate } from 'vue-router'
 	export default defineComponent({
-		
+		setup() {
+			const router = useRouter()
+			router.replace('/home/index')
+
+			onBeforeRouteUpdate(to => {
+				if(to.path === '/home') {
+					router.replace('/home/index')
+				}
+			})
+		},
+		components: {
+			LeftMenu
+		},
+
 	})
 </script>
 
