@@ -1,10 +1,9 @@
 <template>
 	<div v-if="!isLogin">
-		{{ isLogin }}
 		<unLoginHome />
 	</div>
 	<div v-else>
-		
+		<LoginHome />
 	</div>
 </template>
 
@@ -17,6 +16,7 @@
 		useStore
 	} from '@/store'
 	import unLoginHome from '@/components/unLoginHome/unLoginHome.vue'
+	import LoginHome from '@/components/loginHome/loginHome.vue'
 	export default defineComponent({
 		data() {
 			return {
@@ -32,7 +32,8 @@
 			}
 		},
 		components: {
-			unLoginHome
+			unLoginHome,
+			LoginHome
 		}
 	})
 </script>
