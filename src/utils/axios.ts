@@ -69,6 +69,9 @@ instance.interceptors.response.use(
         removePending(response.config);
         const errorCode = response?.data?.code;
         switch (errorCode) {
+			case 0:
+				return Promise.resolve(response.data.data)
+				break
             case 1:
                 // 根据errorCode，对业务做异常处理(和后端约定)
                 message.error(response?.data?.resMsg);
