@@ -6,39 +6,51 @@
 
 		<div class="register_box">
 			<h3 class="register_title">{{ $t('login.register') }}</h3>
-			<!-- <a-upload v-model:file-list="fileList" list-type="picture-card" class="avatar-uploader"
-				:show-upload-list="false" action="/api/uploadimg"
-				:before-upload="beforeUpload" @change="handleChange">
-				<img v-if="imageUrl" :src="imageUrl" alt="avatar" />
-				<div v-else>
-					<loading-outlined v-if="loading"></loading-outlined>
-					<plus-outlined v-else></plus-outlined>
-					<div class="ant-upload-text">{{ $t("upload_header") }}</div>
-				</div>
-			</a-upload> -->
+
 
 			<a-form :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed">
+				
+				
 				<a-form-item>
-					<a-input v-model:value="formState.user" :placeholder="$t('login.username')">
+					<a-input v-model:value="formState.email" :placeholder="$t('login.mail')">
+						<template #prefix>
+							<MailOutlined style="color: rgba(0, 0, 0, 0.25)" />
+						</template>
+					</a-input>
+				</a-form-item>
+				
+				<a-form-item>
+					<a-input v-model:value="formState.code" :placeholder="$t('login.VerificationCode')">
+						<template #prefix>
+							<InsuranceOutlined style="color: rgba(0, 0, 0, 0.25)" />
+						</template>
+						<template #suffix>
+							<a-button @click="getCode(60)" :loading="loadingCode" v-if="!isLock">获取验证码</a-button>
+							<a-button disabled v-else>{{ seconds }}s</a-button>
+						</template>
+					</a-input>
+				</a-form-item>
+				
+				<a-form-item>
+					<a-input v-model:value="formState.username" :placeholder="$t('login.username')">
 						<template #prefix>
 							<UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
 						</template>
 					</a-input>
 				</a-form-item>
+				
 				<a-form-item>
-					<a-input v-model:value="formState.password" type="password" :placeholder="$t('login.password')">
+					<a-input v-model:value="formState.password" :type="isPass ? 'password' : 'text'" :placeholder="$t('login.password')">
 						<template #prefix>
 							<LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
 						</template>
-					</a-input>
-				</a-form-item>
-				<a-form-item>
-					<a-input v-model:value="formState.repassword" type="password" :placeholder="$t('login.repassword')">
-						<template #prefix>
-							<LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
+						<template #suffix>
+							<icon-font type="icon-yanjing" class="icon" @click="isPass = true" v-if="!isPass"/>
+							<icon-font type="icon-biyan" class="icon" @click="isPass = false" v-else/>
 						</template>
 					</a-input>
 				</a-form-item>
+
 				<a-form-item>
 					<a-button type="primary" html-type="submit" class="login_btn" :disabled="disabled">
 						{{ $t('login.register') }}
@@ -48,40 +60,35 @@
 			<span class="to_register_btn" @click="toLogin">已有账号？{{ $t('login.login') }}</span>
 		</div>
 
-
-		<slide-verify ref="slideblock" @again="onAgain" @fulfilled="onFulfilled" @success="onSuccess" @fail="onFail"
-			@refresh="onRefresh" :slider-text="text" :accuracy="accuracy"></slide-verify>
-		
-		<div @click="onRefresh" style="color: #FFFFFF;">
-			121313
-		</div>
-
 	</div>
 </template>
 <script lang="ts">
 	import {
+		InsuranceOutlined,
 		UserOutlined,
 		LockOutlined,
+		MailOutlined
 		// PlusOutlined,
 		// LoadingOutlined
 	} from '@ant-design/icons-vue';
-	import SlideVerify from 'vue-monoplasty-slide-verify';
+	
 	import {
 		defineComponent,
-		computed
+		computed,
+		Ref,
+		ref
 	} from 'vue';
 
 	import {
-		fileList,
-		loading,
-		imageUrl,
-		handleChange,
-		beforeUpload,
-		isSlideSuccess,
-		showSlide,
 		formState,
 		handleFinishFailed,
-	} from './hooks/index'
+		FormState,
+		getCode,
+		loadingCode,
+		isLock,
+		seconds,
+		initTimer
+	} from './hooks/formData'
 	import LangBtn from '@/components/switchLangBtn/index.vue'
 	import {
 		useStore
@@ -89,13 +96,7 @@
 	import {
 		useRouter
 	} from 'vue-router'
-	interface FormState {
-		user: string;
-		password: string;
-		repassword: string;
-	}
-	
-	import * as VERIFY from './hooks/verify'
+
 	
 	export default defineComponent({
 		components: {
@@ -104,12 +105,13 @@
 			UserOutlined,
 			LockOutlined,
 			LangBtn,
-			SlideVerify
+			MailOutlined,
+			InsuranceOutlined
 		},
 
 		setup() {
 			const disabled = computed(() => {
-				return (formState.user && formState.password && formState.repassword) ?
+				return (formState.username && formState.password && formState.code) ?
 					false : true
 			})
 			const store = useStore()
@@ -118,10 +120,10 @@
 			const handleFinish = (values: FormState): void => {
 				console.log(values, formState);
 				store.dispatch('userModule/register', {
-						header: imageUrl.value,
-						username: formState.user,
+						email: formState.email,
+						username: formState.username,
 						password: formState.password,
-						repassword: formState.repassword
+						code: formState.code
 					})
 					.then(() => {
 						router.replace('/')
@@ -131,23 +133,22 @@
 			const toLogin = () => {
 				router.push('/login')
 			}
-			
-			
+			initTimer()
+			const isPass: Ref < boolean> = ref(true)
 		
 			return {
 				disabled,
-				fileList,
-				loading,
-				imageUrl,
-				handleChange,
-				beforeUpload,
-				isSlideSuccess,
-				showSlide,
-				formState,
-				handleFinish,
-				handleFinishFailed,
 				toLogin,
-				...VERIFY
+				handleFinish,
+				isPass,
+				
+				getCode,
+				loadingCode,
+				isLock,
+				formState,
+				handleFinishFailed,
+				seconds,
+				initTimer
 			};
 		}
 	});

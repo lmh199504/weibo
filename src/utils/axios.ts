@@ -71,12 +71,14 @@ instance.interceptors.response.use(
         switch (errorCode) {
 			case 0:
 				return Promise.resolve(response.data.data)
-				break
+			case -1:
+				message.destroy()
+				message.error(response?.data?.msg)
+				return Promise.reject(response?.data?.msg)
             case 1:
                 // 根据errorCode，对业务做异常处理(和后端约定)
-                message.error(response?.data?.resMsg);
-                return Promise.reject(response?.data?.resMsg)
-                break;
+                message.error(response?.data?.msg)
+                return Promise.reject(response?.data?.msg)
             default:
                 break;
         }

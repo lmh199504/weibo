@@ -3,7 +3,7 @@ import { Module } from 'vuex'
 import RootStateTypes from '@/store/interface'
 import UserModuleTypes from '@/store/modules/user/interface'
 import { setToken, getToken, removeToken } from '@/utils/cookies'
-import { reqLogin, reqGetUserInfo, reqRegister } from '@/api'
+import { reqLogin, reqGetUserInfo, reqRegister } from '@/api/user'
 const userModule: Module<UserModuleTypes, RootStateTypes> = {
     namespaced: true,
     state: {

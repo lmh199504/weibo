@@ -7,10 +7,14 @@ export interface LoginData {
 export interface RegisterData {
     username: string;
     password: string;
-    repassword: string;
-    header: string;
+    code: string;
+    email: string;
 };
 
 export interface GetUserInfoData {
     token: string
+}
+
+export interface GetCode {
+	email: string
 }

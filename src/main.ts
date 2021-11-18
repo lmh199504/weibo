@@ -11,6 +11,6 @@ import VueI18n from './common/lang/index'
 
 import { createFromIconfontCN } from '@ant-design/icons-vue';
 const IconFont = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_2641377_n64k49jtcc.js',
+    scriptUrl: '//at.alicdn.com/t/font_2641377_v0v9tmz4qt.js',
 });
 createApp(App).use(store,key).use(VueI18n).use(router).use(Antd).component('IconFont',IconFont).mount('#app')

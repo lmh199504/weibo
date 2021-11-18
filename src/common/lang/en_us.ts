@@ -15,7 +15,9 @@ module.exports = {
 	noaccount:'No Account?',
 	logout: 'logout',
 	accountLogin: 'Account Login',
-	safeLogin: 'Safe Login'
+	safeLogin: 'Safe Login',
+	mail: "Mail",
+	VerificationCode: "Verification Code"
   },
   upload_header: "Upload Header",
   loading: 'loading...',

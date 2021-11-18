@@ -9,4 +9,3 @@ declare module 'js-cookie';
 
 declare module 'nprogress';
 
-declare module 'vue-monoplasty-slide-verify';

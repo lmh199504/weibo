@@ -14,7 +14,9 @@ module.exports = {
     noaccount: '没有账号？',
     logout: '退出',
 	accountLogin: '账号登录',
-	safeLogin: '安全登录'
+	safeLogin: '安全登录',
+	mail: "邮箱",
+	VerificationCode: "验证码"
   },
   upload_header: "上传头像",
   loading: '加载中...',
