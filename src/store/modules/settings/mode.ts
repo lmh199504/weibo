@@ -8,14 +8,22 @@ export const modeType = {
 		activeColor:'#4f94fa',
 		fontColor:'#333',
 		bgColor: '#FFFFFF',
-		iconColor: "#434a54"
+		iconColor: "#434a54",
+		iconBgColor: '#e5e6eb',
+		titleColor: "#333333",
+		hoverBg: "#f2f2f2",
+		primaryColor: '#ff8200'
 	},
 	dark: {
 		baseColor:'#FFF',
 		activeColor:'#4f94fa',
 		fontColor:'#333',
 		bgColor: "#181c27",
-		iconColor: "#FFFFFF"
+		iconColor: "#d3d3d3",
+		iconBgColor: '#3e3e48',
+		titleColor: "#999999",
+		hoverBg: "#25252c",
+		primaryColor: '#ea8011'
 	}
 }
 

@@ -1,7 +1,9 @@
 <template>
-	<div class="modeBtn">
-		<icon-font type="icon-baitian" v-if="mode == 'dark'" @click="switchMode('daily')"/>
-		<icon-font type="icon-yejian" @click="switchMode('dark')" v-else/>
+	<div class="modeBtn flex_column_center" @click="switchMode">
+		<!-- <icon-font type="icon-baitian" v-if="mode == 'dark'" /> -->
+		<!-- <icon-font type="icon-yejian" v-else/> -->
+		<i class="iconfont icon-baitian" v-if="mode == dark"></i>
+		<i class="iconfont icon-yejian" v-else></i>
 	</div>
 </template>
 
@@ -12,8 +14,12 @@
 		name: "ModeBtn",
 		setup() {
 			const store = useStore()
-			const switchMode = (mode :string): void => {
-				store.commit('settingModule/SET_MODE', mode)
+			const switchMode = (): void => {
+				if(mode.value == 'daily') {
+					store.commit('settingModule/SET_MODE', 'dark')
+				} else {
+					store.commit('settingModule/SET_MODE', 'daily')
+				}
 			}
 			const mode = computed(() => store.state.settingModule.mode)
 			return {
@@ -26,9 +32,14 @@
 
 <style scoped lang="less">
 	.modeBtn{
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		background: @iconBgColor;
 		margin-left: 20px;
-		.icon{
-			color: @iconColor!important;
+		cursor: pointer;
+		.iconfont {
+			color: @iconColor;
 		}
 	}
 </style>

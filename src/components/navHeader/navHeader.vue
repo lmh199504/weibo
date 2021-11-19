@@ -17,37 +17,26 @@
 				</div>
 			</div>
 			
-			<div class="gn_position">
-				<div class="gn_nav">
-					<ul class="gn_nav_list clearfix">
-						<li>
-							<router-link to="/index">
-								<HomeOutlined />
-								<span>{{ $t("home") }}</span>
-							</router-link>
-						</li>
-						<li>
-							<router-link to="/game">
-								<AppstoreAddOutlined />
-								<span>{{ $t('game') }}</span>
-							</router-link>
-						</li>
-						<li>
-							<router-link to="/video">
-								<VideoCameraOutlined />
-								<span>{{ $t('video') }}</span>
-							</router-link>
-							
-						</li>
-						<li>
-							<router-link to="/find">
-								<CompassOutlined />
-								<span>{{ $t('find') }}</span>
-							</router-link>
-							
-						</li>
-					</ul>
+			<div class="center_nav">
+				<div class="nav_item flex_column_center nav_item_active">
+					<i class="iconfont icon-shouye"></i>
 				</div>
+				<div class="nav_item flex_column_center">
+					<i class="iconfont icon-ziyuan"></i>
+				</div>
+				<div class="nav_item flex_column_center">
+					<i class="iconfont icon-remen1"></i>
+				</div>
+				<div class="nav_item flex_column_center">
+					<i class="iconfont icon-xinxi_huaban"></i>
+				</div>
+				<div class="nav_item flex_column_center">
+					<i class="iconfont icon-wode"></i>
+				</div>
+			</div>
+			
+			
+			<div class="gn_header_right">
 				<div class="gn_nav gn_login" v-if="!username">
 					<ul class="gn_nav_list clearfix">
 						<li>
@@ -76,26 +65,21 @@
 						</li>
 					</ul>
 				</div>
-
+				
 				<div class="lang_btn">
 					<langBtn />
 				</div>
 				<div class="lang_btn">
 					<ModeBtn />
 				</div>
-				
 			</div>
-			
 		</div>
-		
-		
 	</div>
 </template>
 
 <script lang="ts">
 	import { defineComponent, ref, Ref, computed } from 'vue'
-	import { SearchOutlined, HomeOutlined, VideoCameraOutlined,CompassOutlined, AppstoreAddOutlined } from '@ant-design/icons-vue'
-	import langBtn from '@/components/switchLangBtn/index.vue'
+	import langBtn from '@/components/public/switchLangBtn.vue'
 	import ModeBtn from '@/components/public/modeBtn.vue'
 	import { useStore } from '@/store'
 	import { message } from 'ant-design-vue'
@@ -132,11 +116,6 @@
 			}
 		},
 		components: {
-			SearchOutlined,
-			HomeOutlined,
-			VideoCameraOutlined,
-			CompassOutlined, 
-			AppstoreAddOutlined,
 			langBtn,
 			ModeBtn
 		}

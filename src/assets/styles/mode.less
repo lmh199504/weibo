@@ -1,13 +1,15 @@
 
 // 这里的:export是为了导出样式中的变量值，不需要的可以不使用，var(–变量名，变量值）这是css中的使用方式为了后续在js更改值。
-
+@primaryColor: var(--primary, #ff8200);
 
 @baseColor: var(--baseColor, #4F94FA); 
 @activeColor: var(--activeColor, #4F94FA);
 @fontColor: var(--fontColor, #4F94FA);
 @bgColor: var(--bgColor, #4F94FA);
 @iconColor: var(--iconColor, #4F94FA);
-
+@iconBgColor: var(--iconBgColor, #e5e6eb);
+@titleColor: var(--titleColor, #333333);
+@hoverBg: var(--hoverBg, #f2f2f2);
 
 :export {
     name: "less";
@@ -16,4 +18,7 @@
     fontColor: @fontColor;
 	bgColor: @bgColor;
 	iconColor: @iconColor;
+	iconBgColor: @iconBgColor;
+	titleColor: @titleColor;
+	hoverBg: @hoverBg;
 }
