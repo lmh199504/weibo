@@ -4,22 +4,17 @@ import  RootStateTypes from '@/store/interface'
 import SettingsModuleTypes from '@/store/modules/settings/interface'
 import moment from 'moment'
 import 'moment/locale/zh-cn'
+import Cookies from 'js-cookie'
+import { modeType, changeStyle } from './mode'
 const settingModule: Module<SettingsModuleTypes, RootStateTypes> = {
     namespaced: true,
     state: {
         lang: 'zh',
-        count: 0,
-        loading: false
+        loading: false,
+		mode: 'daily'
     },
     mutations: {
-        ADD_COUNT(state) {
-            state.count += 1
-        },
-        REDUCE_COUNT(state) {
-            state.count -= 1
-        },
 		SET_LANG(state, lang) {
-			console.log(lang)
 			if(lang == 'zh') {
 				moment.locale('zh-cn')
 				state.lang = 'zh'
@@ -27,13 +22,28 @@ const settingModule: Module<SettingsModuleTypes, RootStateTypes> = {
 				moment.locale('en')
 				state.lang = 'en'
 			}
+		},
+		SET_MODE(state, mode: string) {
+			console.log(mode)
+			state.mode = mode
+			Cookies.set('mode', mode)
+			if(mode == 'dark') {
+				changeStyle(modeType['dark'])
+			} else {
+				changeStyle(modeType['daily'])
+			}
 			
+		},
+		INIT_MODE(state) {
+			const mode = Cookies.get('mode')
+			if(mode == 'dark') {
+				state.mode = mode
+				changeStyle(modeType['dark'])
+			} else {
+				state.mode = 'daily'
+				changeStyle(modeType['daily'])
+			}
 		}
-    },
-    actions: {
-        testADD() {
-            console.log(12312312332)
-        }
     }
 }
 

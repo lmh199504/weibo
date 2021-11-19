@@ -1,8 +1,15 @@
 
 
 export default interface UserModuleTypes {
-    username: string;
-    header:string;
-    _id: string;
+    userInfo: UserInfo
     token: string
+}
+
+
+interface UserInfo {
+	username: string
+	email: string
+	header: string
+	status: number
+	id: number
 }

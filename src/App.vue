@@ -11,7 +11,6 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import enUS from 'ant-design-vue/es/locale/en_US'
 import 'moment/dist/locale/zh-cn';
 import fullLoading from '@/components/full_loading'
-import { getToken } from '@/utils/cookies'
 export default defineComponent({
 	name: 'App',
 	components: {
@@ -26,13 +25,9 @@ export default defineComponent({
 			lang
 		}
 	},
-	created() {
+	mounted() {
 		const store = useStore()
-		const token = getToken()
-		if(token) {
-			store.dispatch('userModule/getInfo', token)
-		}
-		
+		store.commit('settingModule/INIT_MODE')
 	}
 })
 </script>

@@ -1,6 +1,6 @@
 
 import { AxiosResponse } from 'axios'
-import { LoginData, RegisterData, GetUserInfoData, GetCode } from './type'
+import { LoginData, RegisterData, GetCode } from './type'
 import instance from '@/utils/axios'
 
 export const reqLogin = (data: LoginData) :Promise<AxiosResponse> => {
@@ -19,11 +19,10 @@ export const reqRegister = (data: RegisterData) :Promise<AxiosResponse> => {
     }) 
 }
 
-export const reqGetUserInfo = (data: GetUserInfoData): Promise<AxiosResponse> => {
+export const reqGetUserInfo = (): Promise<AxiosResponse> => {
     return instance({
         url: '/user/userInfo',
-        method: 'post',
-        data 
+        method: 'get',
     })
 }
 // 获取验证码

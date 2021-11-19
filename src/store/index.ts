@@ -1,7 +1,7 @@
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
 import { InjectionKey } from 'vue'
-import RootStateTypes, { AllStateTypes } from '@/store/interface'
-
+import { AllStateTypes } from '@/store/interface'
+import getters from './getters'
 
 /** 引入设置模块 */
 import settingModule from '@/store/modules/settings'
@@ -10,22 +10,16 @@ import userModule from '@/store/modules/user'
 // 视频
 import videoModule from '@/store/modules/videos'
 
-export default createStore<RootStateTypes>({
-  state: {
-    test: ''
-  },
-  mutations: {
-  },
-  actions: {
-  },
+export default createStore<AllStateTypes>({
   modules: {
     settingModule,
     userModule,
     videoModule
-  }
+  },
+  getters
 })
 
-export const key: InjectionKey<Store<RootStateTypes>> = Symbol('vue-store')
+export const key: InjectionKey<Store<AllStateTypes>> = Symbol('vue-store')
 
 // eslint-disable-next-line
 export function useStore<T = AllStateTypes>() {

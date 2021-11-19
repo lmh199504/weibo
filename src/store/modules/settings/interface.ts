@@ -2,6 +2,8 @@
 
 export default interface SettingsModuleTypes {
     lang: string;
-    count: number;
     loading: boolean;
+	mode: string;
 }
+
+ export enum Mode = { DAYLY = 'daily', DARK= 'dark' }

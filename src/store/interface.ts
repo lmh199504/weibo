@@ -10,7 +10,7 @@ import VideoModuleTypes from './modules/videos/interface'
 
 /** root层 state类型定义 */ 
 export default interface RootStateTypes {
-    test: string
+    test: string,
 }
 
 /** vuex 所有state类型定义集合 */ 

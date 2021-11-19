@@ -4,27 +4,26 @@ import RootStateTypes from '@/store/interface'
 import UserModuleTypes from '@/store/modules/user/interface'
 import { setToken, getToken, removeToken } from '@/utils/cookies'
 import { reqLogin, reqGetUserInfo, reqRegister } from '@/api/user'
+
 const userModule: Module<UserModuleTypes, RootStateTypes> = {
     namespaced: true,
     state: {
-        username: '',
-        header: '',
-        _id: '',
+        userInfo: {
+			username: '',
+			email: '',
+			header: '',
+			status: 0,
+			id: -1
+		},
         token: getToken()
     },
     mutations: {
         SET_TOKEN: (state, token) => {
             state.token = token
         },
-        SET_AVATAR: (state, url) => {
-            state.header = url
-        },
-        SET_ID: (state, id) => {
-            state._id = id
-        },
-        SET_USERNAME: (state, username) => {
-            state.username = username
-        }
+		SET_USER_INFO: (state, userInfo) => {
+			state.userInfo = userInfo
+		}
     },
     actions: {
         // user login
@@ -32,12 +31,9 @@ const userModule: Module<UserModuleTypes, RootStateTypes> = {
             const { username, password } = userInfo
             return new Promise((resolve, reject) => {
                 reqLogin({ username: username.trim(), password: password }).then(response => {
-                    const { data } = response
-                    commit('SET_TOKEN', data.token)
-                    commit('SET_AVATAR', data.headerImg)
-                    commit('SET_ID', data._id)
-                    commit('SET_USERNAME',data.username)
+					const { data } = response
                     setToken(data.token)
+					commit('SET_TOKEN', data.token)
                     resolve('')
                 }).catch(error => {
                     reject(error)
@@ -47,27 +43,26 @@ const userModule: Module<UserModuleTypes, RootStateTypes> = {
 
         // user logout
         logout({ commit }) {
-            commit('SET_TOKEN', '')
-            commit('SET_AVATAR', '')
-            commit('SET_ID', '')
-            commit('SET_USERNAME','')
+            commit("SET_USER_INFO", { 
+				username: '',
+				email: '',
+				header: '',
+				status: 0,
+				id: -1 })
             removeToken()
 			return Promise.resolve()
         },
 
         // get user info
-        getInfo({ commit }, token) {
+        getInfo({ commit }) {
             return new Promise((resolve, reject) => {
-                reqGetUserInfo({token: token }).then(response => {
-                    const { data } = response
+                reqGetUserInfo().then(response => {
+                   const { data } = response
                     if (!data) {
                         reject('Verification failed, please Login again.')
                     }
-                    const {  username, headerImg, _id } = data
-                    commit('SET_USERNAME', username)
-                    commit('SET_AVATAR', headerImg)
-                    commit("SET_ID", _id)
-
+					commit('SET_USER_INFO', data)
+					
                     resolve(data)
                 }).catch(error => {
                     reject(error)
@@ -80,9 +75,6 @@ const userModule: Module<UserModuleTypes, RootStateTypes> = {
 				.then(response => {
 					const { data } = response
 					commit('SET_TOKEN', data.token)
-					commit('SET_AVATAR', data.headerImg)
-					commit('SET_ID', data._id)
-					commit('SET_USERNAME',data.username)
 					setToken(data.token)
 					resolve(data)
 				})

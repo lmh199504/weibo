@@ -25,8 +25,7 @@
 		},
 		setup() {
 			const store = useStore()
-			const isLogin = computed(() => store.state.userModule.username)
-			console.log(isLogin)
+			const isLogin = computed(() => store.state.userModule.userInfo.username)
 			return {
 				isLogin
 			}

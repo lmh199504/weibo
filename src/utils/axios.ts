@@ -21,7 +21,7 @@ const CancelToken = axios.CancelToken;
 // axios 实例
 const instance = axios.create({
     baseURL: '/api',
-    timeout: 10000,
+    timeout: 20 * 1000, //超时时间
     responseType: 'json',
     headers: {
         'Content-Type': 'application/json;charset=UTF-8'
@@ -51,9 +51,9 @@ instance.interceptors.request.use(
         request.cancelToken = new CancelToken((c) => {
             pending.push({ url: request.url, method: request.method, params: request.params, data: request.data, cancel: c });
         });
-		console.log(getToken())
-		if(getToken()) {
-			request.headers['authorization'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+		const token = getToken()
+		if(token) {
+			request.headers['authorization'] = token // 让每个请求携带自定义token 请根据实际情况自行修改
 		}
 		
         return request;
@@ -70,7 +70,7 @@ instance.interceptors.response.use(
         const errorCode = response?.data?.code;
         switch (errorCode) {
 			case 0:
-				return Promise.resolve(response.data.data)
+				return Promise.resolve(response.data)
 			case -1:
 				message.destroy()
 				message.error(response?.data?.msg)

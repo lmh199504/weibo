@@ -80,6 +80,10 @@
 				<div class="lang_btn">
 					<langBtn />
 				</div>
+				<div class="lang_btn">
+					<ModeBtn />
+				</div>
+				
 			</div>
 			
 		</div>
@@ -92,6 +96,7 @@
 	import { defineComponent, ref, Ref, computed } from 'vue'
 	import { SearchOutlined, HomeOutlined, VideoCameraOutlined,CompassOutlined, AppstoreAddOutlined } from '@ant-design/icons-vue'
 	import langBtn from '@/components/switchLangBtn/index.vue'
+	import ModeBtn from '@/components/public/modeBtn.vue'
 	import { useStore } from '@/store'
 	import { message } from 'ant-design-vue'
 	message.config({
@@ -101,9 +106,8 @@
 		name: 'NavHeader',
 		setup() {
 			const store = useStore()
-
-			const username = computed(() => store.state.userModule.username)
-			const header = computed(() => store.state.userModule.header)
+			const username = computed(() => store.state.userModule.userInfo.username)
+			const header = computed(() => store.state.userModule.userInfo.header)
 			let seachValue: Ref<string> = ref('');
 			
 
@@ -133,7 +137,8 @@
 			VideoCameraOutlined,
 			CompassOutlined, 
 			AppstoreAddOutlined,
-			langBtn
+			langBtn,
+			ModeBtn
 		}
 	})
 </script>

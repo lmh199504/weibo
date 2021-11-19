@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import store from '@/store'
 import Index from '../views/index/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -116,10 +117,22 @@ const router = createRouter({
 
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
 	NProgress.start()
-	next()
-	NProgress.done()
+	if(store.state.userModule.token && !store.state.userModule.userInfo.id){
+		console.log("已经登录了")
+		try{
+			await store.dispatch('userModule/getInfo')
+			next()
+			NProgress.done()
+		} catch(e) {
+			next()
+			NProgress.done()
+		}
+	} else {
+		next()
+		NProgress.done()
+	}
 })
 
 export default router
