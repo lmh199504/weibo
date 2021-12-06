@@ -77,7 +77,7 @@
 				loading.value = true;
 				store
 					.dispatch("userModule/login", {
-						username: formState.user,
+						email: formState.user,
 						password: formState.password,
 					})
 					.then(() => {

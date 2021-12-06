@@ -7,6 +7,7 @@
 					<LeftMenu />
 				</div>
 				<div class="main">
+					<ReleaseBox />
 					<router-view />
 				</div>
 				<div class="right">
@@ -21,6 +22,7 @@
 	import { defineComponent } from 'vue'
 	import LeftMenu from '@/components/leftMenu/index.vue'
 	import { useRouter,onBeforeRouteUpdate } from 'vue-router'
+	import ReleaseBox from '@/components/releaseBox/releaseBox.vue'
 	export default defineComponent({
 		setup() {
 			const router = useRouter()
@@ -33,7 +35,8 @@
 			})
 		},
 		components: {
-			LeftMenu
+			LeftMenu,
+			ReleaseBox
 		},
 
 	})

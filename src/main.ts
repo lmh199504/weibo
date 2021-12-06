@@ -11,7 +11,7 @@ import VueI18n from './common/lang/index'
 import '@/assets/styles/iconfont/iconfont.css'
 import { createFromIconfontCN } from '@ant-design/icons-vue';
 const IconFont = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_2641377_ysb5wbyhg3.js',
+    scriptUrl: '//at.alicdn.com/t/font_2641377_ioiho18hv1.js',
 	extraCommonProps: {
 	}
 });

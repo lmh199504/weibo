@@ -4,21 +4,60 @@
 	height: 100%;
 	overflow-y: auto;
 	padding: 20px 0;
+	background: #FFFFFF;
+	// margin-top: 10px;
+	.home_title{
+		padding: 5px 20px;
+		font-size: bold;
+		font-size: 18px;
+		color: #333;
+	}
+	.auto_title{
+		padding: 5px 20px;
+		font-size: 16px;
+		color: #333;
+	}
 	.route_ul{
 		border-bottom: 0.5px solid rgba(255,255,255,0.2);
 		.route_li{
+			padding: 0 5px;
 			.route_item{
 				display: block;
 				padding: 5px 20px;
-				color: #fff;
+				color: #4d4d4d;
+				font-size: 14px;
+				border-radius: 5px;
+				&:hover{
+					background: #f2f2f2;
+				}
 			}
-			:deep .anticon{
-				color: #ffffff;
-				margin-right: 5px;
+			/deep/ .anticon{
+				color: #4d4d4d;
+				margin-right: 10px;
 			}
 			.route_item_active{
-				font-weight: bold;
-				background-color: rgba(255,255,255,0.2); 
+				color: #ff8140;
+				.anticon{
+					color: #ff8140;
+				}
+			}
+		}
+		
+	}
+	.tool{
+		padding: 0 5px;
+		user-select: none;
+		.tool_btn{
+			display: flex;
+			align-items: center;
+			text-align: center;
+			padding: 5px 20px;
+			background-color: #f2f2f2;
+			cursor: pointer;
+			justify-content: center;
+			margin-bottom: 5px;
+			span{
+				margin-left: 5px;
 			}
 		}
 	}
