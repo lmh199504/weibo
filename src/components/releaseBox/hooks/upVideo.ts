@@ -24,7 +24,8 @@ export const videoChange = ({ fileList: newFileList, file }: FileInfo): void => 
 	if(file.status == 'error') {
 		message.error("视频上传失败")
 	}
-	videoList.value = newFileList;
+	const arr = newFileList.filter((item: FileItem) => item.status != 'error')
+	videoList.value = arr;
 };
 
 
@@ -44,15 +45,13 @@ export const handCanVideo = (): void => {
 }
 
 export const beforeUploadVideo = (file: FileItem): boolean | Promise<void> => {
-	const maxsize = 1024 * 1024 * 10
-	console.log(file)
+	const maxsize = 1024 * 1024 * 200
 	if(file.size && file.size > maxsize) {
-		message.error("视频不能大于100M")
+		message.error("视频不能大于200M")
 		return false
 	}
 	return true
 }
-
 
 function getBase64(file: File) {
 	return new Promise((resolve, reject) => {
