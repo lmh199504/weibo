@@ -1,19 +1,15 @@
 
 import store from '@/store'
-
 //语言
 import { createI18n } from 'vue-i18n'		//引入vue-i18n组件
-
-
-
 
 export const getSessionLocale = ():string => {
 	const loacl_lang = sessionStorage.getItem('lang')
 	if(loacl_lang) {
-		store.commit('settingModule/SET_LANG',loacl_lang)
+		store?.commit('settingModule/SET_LANG',loacl_lang)
 		return loacl_lang
 	}
-	store.commit('settingModule/SET_LANG','zh')
+	store?.commit('settingModule/SET_LANG','zh')
 	return 'zh'
 }
 

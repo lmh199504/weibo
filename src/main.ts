@@ -15,4 +15,4 @@ const IconFont = createFromIconfontCN({
 	extraCommonProps: {
 	}
 });
-createApp(App).use(store,key).use(VueI18n).use(router).use(Antd).component('IconFont',IconFont).mount('#app')
+createApp(App).use(store,key).use(router).use(Antd).use(VueI18n).component('IconFont',IconFont).mount('#app')

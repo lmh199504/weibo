@@ -119,8 +119,6 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 router.beforeEach(async (to, from, next) => {
 	NProgress.start()
-	console.log(store.state.userModule.token)
-	console.log(!store.state.userModule.userInfo.id)
 	if(store.state.userModule.token && store.state.userModule.userInfo.id == -1){
 		console.log("已经登录了")
 		try{

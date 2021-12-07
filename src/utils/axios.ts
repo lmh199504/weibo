@@ -1,5 +1,8 @@
 import axios, { AxiosRequestConfig, Method } from 'axios';
-import { message } from 'ant-design-vue'
+import router from '@/router';
+import store from '@/store';
+
+import { message } from 'ant-design-vue';
 message.config({
     top: '300px'
 })
@@ -79,6 +82,10 @@ instance.interceptors.response.use(
                 // 根据errorCode，对业务做异常处理(和后端约定)
                 message.error(response?.data?.msg)
                 return Promise.reject(response?.data?.msg)
+			case 401:
+				store.dispatch('userModule/logout')
+				router.push('/login')
+				return Promise.reject(response?.data?.msg)
             default:
                 break;
         }
