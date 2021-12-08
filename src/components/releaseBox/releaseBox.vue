@@ -11,7 +11,7 @@
 				@change="handleChange" :before-upload="beforeUploadImg">
 				<div v-if="fileList.length < 9">
 					<plus-outlined />
-					<div class="ant-upload-text">上传</div>
+					<div class="ant-upload-text">{{ $t('upload') }}</div>
 				</div>
 			</a-upload>
 		</div>
@@ -25,7 +25,7 @@
 				@change="videoChange" :before-upload="beforeUploadVideo">
 				<div v-if="fileList.length < 9">
 					<plus-outlined />
-					<div class="ant-upload-text">上传</div>
+					<div class="ant-upload-text">{{ $t('upload') }}</div>
 				</div>
 			</a-upload>
 		</div>
@@ -77,7 +77,9 @@
 					<icon-font type="icon-wxbdingwei"></icon-font>
 				</div>
 			</div>
-			<div class="tool_right"></div>
+			<div class="tool_right">
+				<a-button type="primary" shape="round" :disabled="!releaseText">发送</a-button>
+			</div>
 		</div>
 
 
@@ -165,7 +167,7 @@
 		.footer_tool {
 			display: flex;
 			margin-top: 5px;
-
+			justify-content: space-between;
 			.tool_left {
 				display: flex;
 

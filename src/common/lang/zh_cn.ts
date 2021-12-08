@@ -24,5 +24,6 @@ module.exports = {
   home: '首页',
   find: '发现',
   game: '游戏',
-  video: '视频'
+  video: '视频',
+  upload: '上传'
 }

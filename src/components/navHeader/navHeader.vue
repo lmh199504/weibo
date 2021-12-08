@@ -18,20 +18,23 @@
 			</div>
 			
 			<div class="center_nav">
-				<div class="nav_item flex_column_center nav_item_active">
+				<div class="nav_item flex_column_center nav_item_active" title="首页">
 					<i class="iconfont icon-shouye"></i>
 				</div>
-				<div class="nav_item flex_column_center">
+				<div class="nav_item flex_column_center" title="视频">
 					<i class="iconfont icon-ziyuan"></i>
 				</div>
-				<div class="nav_item flex_column_center">
+				<div class="nav_item flex_column_center" title="热门">
 					<i class="iconfont icon-remen1"></i>
 				</div>
-				<div class="nav_item flex_column_center">
+				<div class="nav_item flex_column_center" title="消息">
 					<i class="iconfont icon-xinxi_huaban"></i>
 				</div>
-				<div class="nav_item flex_column_center">
-					<i class="iconfont icon-wode"></i>
+				<div class="nav_item flex_column_center" :title="username">
+					<div v-if="header" class="icon_header">
+						<img :src="header" :alt="username">
+					</div>
+					<i class="iconfont icon-wode" v-else></i>
 				</div>
 			</div>
 			
@@ -54,12 +57,12 @@
 				</div>
 				<div class="gn_nav gn_login" v-else>
 					<ul class="gn_nav_list clearfix">
-						<li class="username">
+						<!-- <li class="username">
 							{{ username }}
 						</li>
 						<li class="user_header">
 							<img :src="header" alt="">
-						</li>
+						</li> -->
 						<li>
 							<a-button @click="logOut">{{ $t('login.logout') }}</a-button>
 						</li>

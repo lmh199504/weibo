@@ -25,5 +25,6 @@ module.exports = {
   home: 'Home',
   find: 'Find',
   game: 'Game',
-  video: 'Video'
+  video: 'Video',
+  upload: 'Upload'
 }
