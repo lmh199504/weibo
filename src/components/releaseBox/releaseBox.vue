@@ -21,9 +21,9 @@
 			<a-upload v-model:file-list="videoList" v-if="videoList.length!=0" action="/api/user/uploadFile"
 				accept="video/*" :headers="{
 					authorization: token
-				}" :disabled="disableVideo" list-type="picture-card" @preview="handPrevVideo"
+				}"  list-type="picture-card" @preview="handPrevVideo"
 				@change="videoChange" :before-upload="beforeUploadVideo">
-				<div v-if="fileList.length < 9">
+				<div v-if="videoList.length < 1">
 					<plus-outlined />
 					<div class="ant-upload-text">{{ $t('upload') }}</div>
 				</div>
@@ -62,14 +62,14 @@
 				<a-upload v-model:file-list="fileList" action="/api/user/uploadFile" accept="image/*"
 					:disabled="disableImg" @change="handleChange"
 					:before-upload="beforeUploadImg">
-					<div class="left_item flex_column_center">
+					<div class="left_item flex_column_center" :class="{ disabledItem: disableImg }">
 						<icon-font type="icon-tupian"></icon-font>
 					</div>
 				</a-upload>
 				<a-upload v-model:file-list="videoList" action="/api/user/uploadFile" accept="video/*"
 					:disabled="disableVideo" @change="videoChange"
 					:before-upload="beforeUploadVideo">
-					<div class="left_item flex_column_center">
+					<div class="left_item flex_column_center" :class="{ disabledItem: disableVideo }">
 						<icon-font type="icon-shipin1"></icon-font>
 					</div>
 				</a-upload>
@@ -130,7 +130,7 @@
 
 			const token = computed(() => store.state.userModule.token)
 			const disableImg = computed(() =>  UpVideo.videoList.value.length !=0 || UpImg.fileList.value.length >= 9 )
-			const disableVideo = computed(() =>  UpImg.fileList.value.length !=0 || UpVideo.videoList.value.length >= 9 )
+			const disableVideo = computed(() =>  UpImg.fileList.value.length !=0 || UpVideo.videoList.value.length >= 1 )
 			
 			reqGetEmoticon()
 				.then(res => {
@@ -185,6 +185,14 @@
 					&:hover {
 						color: #ff8140;
 						background: #fff2e5;
+					}
+				}
+				.disabledItem{
+					cursor: not-allowed;
+					color: #d5d5d5;
+					&:hover{
+						color: #d5d5d5;
+						background: transparent;
 					}
 				}
 
