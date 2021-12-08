@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { message } from 'ant-design-vue'
-interface FileItem {
+export interface FileItem {
 	uid: string;
 	name?: string;
 	status?: string;

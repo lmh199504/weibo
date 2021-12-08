@@ -78,7 +78,7 @@
 				</div>
 			</div>
 			<div class="tool_right">
-				<a-button type="primary" shape="round" :disabled="!releaseText">发送</a-button>
+				<a-button type="primary" shape="round" :disabled="!releaseText" @click="sendDynamics">发送</a-button>
 			</div>
 		</div>
 
@@ -99,8 +99,6 @@
 	} from '@ant-design/icons-vue';
 	import {
 		defineComponent,
-		Ref,
-		ref,
 		reactive,
 		computed
 	} from 'vue'
@@ -109,6 +107,7 @@
 	} from '@/api/weibo/index'
 	import * as UpImg from './hooks/upImg'
 	import * as UpVideo from './hooks/upVideo'
+	import * as Publish from './hooks/publish'
 	import {
 		useStore
 	} from '@/store'
@@ -124,7 +123,7 @@
 		},
 		setup() {
 			const store = useStore()
-			let releaseText: Ref < string > = ref('')
+			
 			// eslint-disable-next-line 
 			let emoList = reactive < Array < any >> ([])
 
@@ -140,13 +139,13 @@
 					})
 				})
 			return {
-				releaseText,
 				emoList,
 				token,
 				...UpImg,
 				...UpVideo,
 				disableImg,
-				disableVideo
+				disableVideo,
+				...Publish
 			}
 		},
 		methods: {

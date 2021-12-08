@@ -43,6 +43,9 @@ const settingModule: Module<SettingsModuleTypes, RootStateTypes> = {
 				state.mode = 'daily'
 				changeStyle(modeType['daily'])
 			}
+		},
+		SET_LOADING(state, flag: boolean) {
+			state.loading = flag
 		}
     }
 }
