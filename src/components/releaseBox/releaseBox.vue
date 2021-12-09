@@ -61,6 +61,9 @@
 
 				<a-upload v-model:file-list="fileList" action="/api/user/uploadFile" accept="image/*"
 					:disabled="disableImg" @change="handleChange"
+					:headers="{
+						authorization: token
+					}"
 					:before-upload="beforeUploadImg">
 					<div class="left_item flex_column_center" :class="{ disabledItem: disableImg }">
 						<icon-font type="icon-tupian"></icon-font>
@@ -68,6 +71,9 @@
 				</a-upload>
 				<a-upload v-model:file-list="videoList" action="/api/user/uploadFile" accept="video/*"
 					:disabled="disableVideo" @change="videoChange"
+					:headers="{
+						authorization: token
+					}"
 					:before-upload="beforeUploadVideo">
 					<div class="left_item flex_column_center" :class="{ disabledItem: disableVideo }">
 						<icon-font type="icon-shipin1"></icon-font>

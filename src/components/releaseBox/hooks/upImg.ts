@@ -23,7 +23,7 @@ export const handleChange = ({ fileList: newFileList, file }: FileInfo): void =>
 	if(file.status == 'error') {
 		message.error("图片上传失败")
 	}
-	fileList.value = newFileList;
+	fileList.value = newFileList.filter((item: FileItem) => item.status != 'error')
 };
 
 

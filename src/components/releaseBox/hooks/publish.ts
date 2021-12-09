@@ -11,7 +11,7 @@ export const sendDynamics = (): void => {
 	
 	const pic: Array<string> = []
 	fileList.value.forEach((item: FileItem) => {
-		pic.push(item.url as string)
+		pic.push(item.response as string)
 	})
 	
 	let video: string | undefined = ''
