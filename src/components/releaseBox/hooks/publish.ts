@@ -32,7 +32,7 @@ export const sendDynamics = (): void => {
 	.then(res => {
 		loading.value = false
 		console.log(res)
-		
+		releaseText.value = ''
 		store.commit('settingModule/SET_LOADING', false)
 	})
 	.catch((err) => {

@@ -33,7 +33,7 @@
 		<div class="footer_tool">
 			<div class="tool_left">
 
-				<a-popover :trigger="['click']" v-model="emoActive" placement="bottomRight">
+				<a-popover :trigger="['click']" v-model="emoActive" placement="bottomLeft">
 					<div class="left_item flex_column_center" @click="emoActive=true">
 						<icon-font type="icon-biaoqing"></icon-font>
 					</div>

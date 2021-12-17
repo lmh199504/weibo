@@ -1,8 +1,8 @@
 
 <template>
 	<div class="DynamicItem">
-		<imgDynamic v-if="num>0.5" />
-		<videoDynamic v-else/>
+		<imgDynamic :itemData="itemData"/>
+		<videoDynamic v-if="false"/>
 	</div>
 </template>
 
@@ -12,6 +12,14 @@
 	import videoDynamic from '../videoDynamic/videoDynamic.vue'
 	export default defineComponent({
 		name: 'DynamicItem',
+		props: {
+			itemData: {
+				type: Object,
+				default: () => {
+					return {}
+				}
+			}
+		},
 		setup() {
 			const num = ref(Math.random())
 			return {

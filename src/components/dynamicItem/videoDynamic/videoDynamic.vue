@@ -1,6 +1,8 @@
 
 <template>
     <div class="videoDynamic">
+		<DynamicHead />
+		
         <div class="left">
             <videoPlayer />
         </div>
@@ -14,12 +16,14 @@
 <script lang="ts">
     import dynamicFooter from '@/components/dynamicFooter/dynamicFooter.vue'
     import videoPlayer from '@/components/videoPlayer/videoPlayer.vue'
+	import DynamicHead from '@/components/dynamicHead/index.vue'
     import { defineComponent } from 'vue'
     export default defineComponent({
         name: 'videoDynamic',
         components: {
             dynamicFooter,
-            videoPlayer
+            videoPlayer,
+			DynamicHead
         }
     })
 </script>  
