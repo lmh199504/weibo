@@ -23,19 +23,14 @@
 			</div>
 		</div>
 		
-		<DynamicFooter />
+		<DynamicFooter :itemData="itemData"/>
 	</div>
 </template>
 
 <script lang="ts">
-	import { defineComponent,reactive, computed } from 'vue'
+	import { defineComponent } from 'vue'
 	import DynamicFooter from '@/components/dynamicFooter/dynamicFooter.vue'
 	import DynamicHead from '@/components/dynamicHead/index.vue'
-	interface ImgItem{
-		title:string
-		url:string
-		readNum: number
-	}
 	export default defineComponent({
 		name: 'ImgDynamic',
 		props: {
@@ -47,32 +42,7 @@
 			}
 		},
 		setup() {
-			const length = 1
-			const imgList = reactive<ImgItem[]>([])
-			for ( let i = 0; i < length; i ++) {
-				imgList.push({
-					title: '这是一个图片',
-					url: 'https://reactlmh.oss-cn-beijing.aliyuncs.com/images/ccd2a280-d652-11ea-8d08-bbc0b0f9d824.png',
-					readNum: 8911002
-				})
-			}
-
-			// 需要显示的图片
-			const showImgList = computed(() => {
-				if(imgList.length>=4) {
-					return imgList.filter((item,index) => index<4)
-				}else if(imgList.length>=1) {
-					return imgList.filter((item,index) => index == 0)
-				}else {
-					return []
-				}
-				
-			})
-
-			return {
-				imgList,
-				showImgList
-			}
+			return {}
 		},
 		components: {
 			DynamicFooter,
@@ -83,23 +53,4 @@
 
 <style lang="less" scoped>
 	@import './imgDynamic.less';
-</style>
-
-<style lang="less" scoped>
-	.threeImg{
-		.ant-image{
-			height: 100%;
-			.ant-image-img{
-				height: 100%;
-			}
-		}
-	}
-	.oneImg{
-		// display: flex;
-		// .img_dynamic_left{
-		// 	width: 158px;
-		// 	height: 102px;
-		// 	margin-right: 10px;
-		// }
-	}
 </style>

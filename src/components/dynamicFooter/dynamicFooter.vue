@@ -12,15 +12,15 @@
         <div class="right">
             <div class="tool_item">
                 <icon-font type="icon-zhuanfa" class="icon" />
-                <span>1710</span>
+                <span>{{ itemData.reposts_count }}</span>
             </div>
             <div class="tool_item">
                 <icon-font type="icon-pinglun" class="icon" />
-                <span>1710</span>
+                <span>{{ itemData.comments_count }}</span>
             </div>
             <div class="tool_item">
                 <icon-font type="icon-dianzan" class="icon"/>
-                <span>2132</span>
+                <span>{{ itemData.attitudes_count }}</span>
             </div>
             
         </div>
@@ -31,7 +31,14 @@
 
     import { defineComponent }  from 'vue'
     export default defineComponent({
-
+		props: {
+			itemData: {
+				type: Object,
+				default: () => {
+					return {}
+				}
+			}
+		}
     })
 </script>
 

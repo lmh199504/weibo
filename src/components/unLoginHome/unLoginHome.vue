@@ -37,7 +37,7 @@
 				</a-carousel>
 			</div>
 			<!-- 一条动态 -->
-			<DynamicItem v-for="(item,index) in dynamicList" :key="index"/>
+			<DynamicItem v-for="(item,index) in dynamicList" :key="index" :itemData="item"/>
 			<div v-if="loading">
 				<a-spin tip="Loading...">
 					<div class="spin-content">
@@ -142,27 +142,7 @@
 			}
 
 			// 动态列表
-			var dynamicList = reactive([
-				{
-					type: 'img',
-					imgLength: 7
-				}, {
-					type: 'img',
-					imgLength: 8
-				},{
-					type: 'video'
-				},{
-					type: 'video'
-				},{
-					type: 'video'
-				},{
-					type: 'img',
-					imgLength: 7
-				},{
-					type: 'img',
-					imgLength: 7
-				}
-			])
+			var dynamicList = reactive([])
 			
 			// 加载动态列表
 
@@ -174,10 +154,7 @@
 				}
 				loading.value = true
 				setTimeout(() => {
-					dynamicList.push({
-						type: 'img',
-						imgLength: 7
-					})
+					
 					loading.value = false
 				}, 1500)
 				
