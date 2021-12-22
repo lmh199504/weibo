@@ -1,10 +1,10 @@
 
 <template>
 	<div class="videoPlayer">
-		<video ref="videoplayer" preload class="videoMedia" src="https://reactlmh.oss-cn-beijing.aliyuncs.com/uploadVideo/lmh_1611991420931.mp4" poster="https://reactlmh.oss-cn-beijing.aliyuncs.com/images/e573ad80-d651-11ea-9086-73bc466dfa3b.png">
+		<video ref="videoplayer" preload class="videoMedia" :src="src" :poster="poster" @error="playError">
 		</video>
 		<div class="poster" v-if="isInit">
-			<img class="posterimg" src="https://reactlmh.oss-cn-beijing.aliyuncs.com/images/e573ad80-d651-11ea-9086-73bc466dfa3b.png" alt="">
+			<img class="posterimg" :src="poster" alt="" v-if="poster">
 			<div class="playIcon">
 				<icon-font type="icon-bofang" class="icon" @click="playVideo"/>
 			</div>
@@ -41,6 +41,16 @@
 	
 	export default defineComponent({
 		name: "videoPlayer",
+		props: {
+			src: {
+				type: String,
+				default: ""
+			},
+			poster: {
+				type: String,
+				default: ""
+			}
+		},
 		setup() {
 			const store = useStore()
 			const uid = createRandomId()
@@ -109,7 +119,12 @@
 			var currentId = computed(() => {
 				return store.state.videoModule.videoId
 			})
-
+			
+			// 播放错误
+			const playError = () => {
+				console.log("播放错误")
+			}
+			
 			watch(currentId, (newValue) => {
 				if(newValue != uid) {
 					pauseVideo()
@@ -127,11 +142,9 @@
 				fullScreen,
 				isInit,
 				filterDuration,
-				filterCurrentTime
+				filterCurrentTime,
+				playError
 			}
-		},
-		methods: {
-
 		}
 	})
 </script>

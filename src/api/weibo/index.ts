@@ -1,6 +1,6 @@
 import instance from '@/utils/axios'
 import { AxiosResponse } from 'axios'
-import { unReadData } from './type'
+import { unReadData, friendData } from './type'
 export const reqGetEmoticon = () :Promise<AxiosResponse> => {
     return instance({
         url: '/weibo/getemoticon',
@@ -17,3 +17,11 @@ export const reqGetUnreadFriends = (data: unReadData) :Promise<AxiosResponse> =>
 	})
 }
 
+// 获取好友动态
+export const reqGetfriendstimeline = (data: friendData): Promise<AxiosResponse> => {
+	return instance({
+		url: '/weibo/getfriendstimeline',
+		method: 'get',
+		params: data
+	})
+}

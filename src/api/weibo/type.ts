@@ -5,4 +5,13 @@ export interface unReadData{
 	max_id?: number | string;
 	count: number;
 	since_id?: number | string;
-}
+};
+
+export interface friendData{
+	list_id: number;
+	refresh?: number;
+	count?: number;
+	since_id?: number;
+	max_id?: number | string | undefined;
+	fid: number;
+};
