@@ -4,9 +4,9 @@
 			<div class="tab_item" :class="{ tab_item_active: active == 1 }" gid="100012992035983" @click="tabNav(1)">全部</div>
 			<div class="tab_item" :class="{ tab_item_active: active == 2 }" gid="110012992035983" @click="tabNav(2)">原创</div>
 			<div class="tab_item" :class="{ tab_item_active: active == 3 }" gid="110022992035983" @click="tabNav(3)">视频</div>
-			<div class="tab_item" :class="{ tab_item_active: active == 4 }" @click="tabNav(4)">超话社区</div>
-			<div class="tab_item" :class="{ tab_item_active: active == 5 }" @click="tabNav(5)">V+微博</div>
-			<div class="tab_item" :class="{ tab_item_active: active == 6 }" @click="tabNav(6)">群微博</div>
+			<div class="tab_item" :class="{ tab_item_active: active == 4 }" gid="110052992035983" @click="tabNav(4)">超话社区</div>
+			<div class="tab_item" :class="{ tab_item_active: active == 5 }" gid="100132992035983" @click="tabNav(5)">V+微博</div>
+			<div class="tab_item" :class="{ tab_item_active: active == 6 }" gid="100102992035983" @click="tabNav(6)">群微博</div>
 		</div>
 		
 		
@@ -17,6 +17,12 @@
 		</div>
 		
 		<DynamicItem v-for="(item,index) in list" :key="index" :itemData="item"/>
+		
+		<div class="empty" v-if="!loading && list.length == 0">
+			<a-empty />
+		</div>
+		
+		
 		
 		<div v-if="loading" class="loading">
 			<a-spin tip="Loading...">
@@ -29,7 +35,7 @@
 
 <script lang="ts">
 	import { Ref, ref, onMounted } from 'vue'
-	import { reqGetUnreadFriends, reqGetfriendstimeline } from '@/api/weibo'
+	import { reqGetUnreadFriends, reqGetfriendstimeline, reqGetgroupstimeline } from '@/api/weibo'
 	import { defineComponent } from 'vue'
 	import DynamicItem from '@/components/dynamicItem/dynamicItem/dynamicItem.vue'
 	import $bus from '@/libs/bus'
@@ -59,9 +65,14 @@
 							res = await reqGetfriendstimeline({ count: 10, max_id: max_id, list_id: 110022992035983, fid: 110022992035983 })
 							break
 						case 4:
+							res = await reqGetgroupstimeline({ count: 10, max_id: max_id, list_id: 110052992035983 })
 							break	
 						case 5:
-							break	
+							res = await reqGetgroupstimeline({ count: 10, max_id: max_id, list_id: 100132992035983 })
+							break
+						case 6:
+							res = await reqGetgroupstimeline({ count: 10, max_id: max_id, list_id: 100102992035983 })
+							break
 						default: 
 							break
 					}
@@ -142,5 +153,13 @@
 		background: #FFFFFF;
 		border-radius: 5px;
 		padding: 10px;
+	}
+	.empty{
+		margin-top: 10px;
+		background: #FFFFFF;
+		border-radius: 5px;
+		padding: 10px;
+		min-height: 500px;
+		padding-top: 200px;
 	}
 </style>

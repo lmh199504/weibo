@@ -24,9 +24,8 @@
 			const num = ref(Math.random())
 			
 			const dyType = computed(() => {
-				console.log(props.itemData)
 				props.itemData.page_info
-				if(props.itemData.page_info) {
+				if(props.itemData?.page_info?.object_type === 'video') {
 					return 'video'
 				}
 				return 'img'

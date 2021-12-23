@@ -15,3 +15,12 @@ export interface friendData{
 	max_id?: number | string | undefined;
 	fid: number;
 };
+
+
+export interface groudData{
+	list_id: number | string;
+	refresh?: number;
+	count?: number;
+	fast_refresh?: number;
+	max_id?: number | string | undefined;
+}

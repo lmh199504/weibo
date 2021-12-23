@@ -24,18 +24,18 @@
 <script lang="ts">
 	import { defineComponent } from 'vue'
 	import LeftMenu from '@/components/leftMenu/index.vue'
-	import { useRouter,onBeforeRouteUpdate } from 'vue-router'
+	// import { useRouter,onBeforeRouteUpdate } from 'vue-router'
 	import ReleaseBox from '@/components/releaseBox/releaseBox.vue'
 	export default defineComponent({
 		setup() {
-			const router = useRouter()
-			router.replace('/home/index')
+			// const router = useRouter()
+			// router.replace('/home/index')
 
-			onBeforeRouteUpdate(to => {
-				if(to.path === '/home') {
-					router.replace('/home/index')
-				}
-			})
+			// onBeforeRouteUpdate(to => {
+			// 	if(to.path === '/home') {
+			// 		router.replace('/home/index')
+			// 	}
+			// })
 		},
 		components: {
 			LeftMenu,

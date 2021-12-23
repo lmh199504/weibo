@@ -10,7 +10,7 @@
 				</router-link>
 			</li>
 			<li class="route_li">
-				<router-link to="/home/myCollection" class="route_item" active-class="route_item_active">
+				<router-link to="/home/newWeiBo" class="route_item" active-class="route_item_active">
 					<icon-font type="icon-guanzhu1" />
 					<span>最新微博</span>
 				</router-link>

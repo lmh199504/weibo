@@ -5,7 +5,7 @@
 			<div class="content_text">之前C罗在新闻发布会上把可乐挪走的行为话题度爆棚。现在C罗被淘汰出局，可乐的“报复”机会来了！</div>
 		</div>
 		<div class="left">
-			<videoPlayer :itemData="itemData" :poster="itemData.page_info.page_pic"/>
+			<videoPlayer :itemData="itemData" :poster="itemData.page_info.page_pic" :src="itemData.page_info.media_info.mp4_sd_url"/>
 		</div>
 		<dynamicFooter :itemData="itemData"/>
 	</div>

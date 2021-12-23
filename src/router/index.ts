@@ -7,7 +7,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Index',
     component: Index,
-	redirect: 'home',
+	redirect: '/home',
 	children: [
 		{
 			path: 'game',
@@ -18,6 +18,7 @@ const routes: Array<RouteRecordRaw> = [
 			path:'home',
 			name: 'Home',
 			component: () => import('@/views/home/home.vue'),
+			redirect: '/home/index',
 			children: [
 				{
 					path: 'index',
