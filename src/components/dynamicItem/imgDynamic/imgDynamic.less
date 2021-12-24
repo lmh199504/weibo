@@ -35,11 +35,16 @@
 	.threeImg:nth-child(3n) {
 		padding: 0 0 10px 10px;
 	}
-	.content_text{
+	/deep/ .content_text{
 		font-size: 14px;
 		color: #333;
 		margin-bottom: 10px;
+		img{
+			width: 18px!important;
+			margin-left: 2px;
+		}
 	}
+
 	.img_dynamic_right{
 		flex: 1;
 		display: flex;
@@ -48,7 +53,7 @@
 	}
 
 	.img_dynamic_left{
-		width: 80%;
+		width: 200px;
 		/deep/ .ant-image{
 			width: 100%;
 			min-height: 100%;

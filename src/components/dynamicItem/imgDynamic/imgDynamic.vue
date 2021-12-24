@@ -3,9 +3,7 @@
 		<DynamicHead :itemData="itemData" />
 		<div class="img_main">
 			<div v-if="itemData.pic_num > 1">
-				<div class="content_text">
-					{{ itemData.text_raw }}
-				</div>
+				<div class="content_text" v-html="itemData.text"></div>
 				<div class="imgWrapper">
 					<a-image-preview-group>
 						<div class="threeImg" v-for="(item,index) in itemData.pic_ids" :key="index">
@@ -16,7 +14,7 @@
 			</div>
 			<div v-else class="oneImg">
 				<div class="img_dynamic_right">
-					<div class="content_text">{{ itemData.text_raw }} </div>
+					<div class="content_text" v-html="itemData.text"></div>
 				</div>
 				<div class="img_dynamic_left">
 					<a-image-preview-group>

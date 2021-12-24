@@ -64,6 +64,11 @@ const routes: Array<RouteRecordRaw> = [
 					path: 'exclusive',
 					name: '专属微博',
 					component: () => import('@/views/home/exclusiveWeiBo/index.vue')
+				},
+				{
+					path: "group/:gid",
+					name: "分组微博",
+					component: () => import('@/views/home/group.vue')
 				}
 			]
 		},

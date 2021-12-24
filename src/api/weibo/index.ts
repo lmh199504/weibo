@@ -33,3 +33,10 @@ export const reqGetgroupstimeline = (data: groudData): Promise<AxiosResponse> =>
 		params: data
 	})
 }
+// 获取分组
+export const reqGetAllGroups = (): Promise<AxiosResponse> => {
+	return instance({
+		url: "/weibo/getAllGroups",
+		method: 'get',
+	})
+}
