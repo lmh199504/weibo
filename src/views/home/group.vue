@@ -49,7 +49,7 @@
 				loading.value = true
 				let res = null
 				try{
-					res = await reqGetgroupstimeline({ count: 10, max_id: max_id, list_id: gid })
+					res = await reqGetgroupstimeline({ count: 10, max_id: max_id, list_id: Number(gid) })
 					if(type == 'init') {
 						list.value = res?.data?.statuses
 					} else {
