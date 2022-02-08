@@ -22,43 +22,61 @@ const routes: Array<RouteRecordRaw> = [
 			children: [
 				{
 					path: 'index',
-					name: '首页的首页',
+					name: 'Index',
 					component: () => import('@/views/home/index/index.vue')
 				},
 				{
 					path: 'myPraise',
-					name: '我的赞',
+					name: 'MyPraise',
 					component: () => import('@/views/home/myPraise/index.vue')
 				},
 				{
 					path: 'myCollection',
-					name: '我的收藏',
-					component: () => import('@/views/home/myCollection/index.vue')
+					name: 'MyCollection',
+					component: () => import('@/views/home/myCollection/index.vue'),
+					meta: {
+						title: "我的收藏"
+					}
 				},
 				{
 					path: 'hotWeiBo',
-					name: '热门微博',
-					component: () => import('@/views/home/hotWeibo/index.vue')
+					name: 'HotWeiBo',
+					component: () => import('@/views/home/hotWeibo/index.vue'),
+					meta: {
+						title: "热门微博"
+					}
 				},
 				{
 					path: 'hotVideo',
-					name: '热门视频',
-					component: () => import('@/views/home/hotVideo/index.vue')
+					name: 'HotVideo',
+					component: () => import('@/views/home/hotVideo/index.vue'),
+					meta: {
+						title: "热门视频"
+					}
 				},
 				{
 					path: 'newWeiBo',
-					name: '最新微博',
-					component: () => import('@/views/home/newWeiBo/index.vue')
+					name: 'NewWeiBo',
+					component: () => import('@/views/home/newWeiBo/index.vue'),
+					meta: {
+						title: "最新微博"
+					}
 				},
 				{
 					path: 'friends',
-					name: '好友圈',
-					component: () => import('@/views/home/friendQuan/index.vue')
+					name: 'Friends',
+					component: () => import('@/views/home/friendQuan/index.vue'),
+					meta: {
+						title: "好友圈"
+					}
 				},
 				{
 					path: 'specialAttention',
-					name: '特别关注',
-					component: () => import('@/views/home/specialAttention/index.vue')
+					name: 'SpecialAttention',
+					component: () => import('@/views/home/specialAttention/index.vue'),
+					meta: {
+						title: "特别关注"
+					}
 				},
 				{
 					path: 'exclusive',
@@ -81,6 +99,21 @@ const routes: Array<RouteRecordRaw> = [
 			path: 'find',
 			name: 'Find',
 			component: () => import('@/views/find/find.vue')
+		},
+		{
+			path: 'hot',
+			name: 'Hot',
+			component: () => import('@/views/hot/hot.vue')
+		},
+		{
+			path: 'message',
+			name: 'Message',
+			component: () => import('@/views/message/message.vue')
+		},
+		{
+			path: "/user/:id",
+			name: "User",
+			component: () => import('@/views/user/user.vue')
 		}
 	]
   },

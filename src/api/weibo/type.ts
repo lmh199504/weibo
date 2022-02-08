@@ -24,3 +24,7 @@ export interface groudData{
 	fast_refresh?: number;
 	max_id?: number | string | undefined;
 }
+
+export interface userInfoData{
+	uid: number | string;
+}

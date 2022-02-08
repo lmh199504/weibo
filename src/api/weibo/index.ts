@@ -1,6 +1,6 @@
 import instance from '@/utils/axios'
 import { AxiosResponse } from 'axios'
-import { unReadData, friendData, groudData } from './type'
+import { unReadData, friendData, groudData, userInfoData } from './type'
 export const reqGetEmoticon = () :Promise<AxiosResponse> => {
     return instance({
         url: '/weibo/getemoticon',
@@ -38,5 +38,13 @@ export const reqGetAllGroups = (): Promise<AxiosResponse> => {
 	return instance({
 		url: "/weibo/getAllGroups",
 		method: 'get',
+	})
+}
+// 获取微博用户信息
+export const reqGetUserInfo = (data: userInfoData): Promise<AxiosResponse> => {
+	return instance({
+		url: "/weibo/getWeiBoInfo",
+		method: 'get',
+		params: data
 	})
 }

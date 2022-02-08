@@ -18,19 +18,27 @@
 			</div>
 			
 			<div class="center_nav">
-				<div class="nav_item flex_column_center nav_item_active" title="首页">
-					<i class="iconfont icon-shouye"></i>
-				</div>
-				<div class="nav_item flex_column_center" title="视频">
-					<i class="iconfont icon-ziyuan"></i>
-				</div>
-				<div class="nav_item flex_column_center" title="热门">
-					<i class="iconfont icon-remen1"></i>
-				</div>
-				<div class="nav_item flex_column_center" title="消息">
-					<i class="iconfont icon-xinxi_huaban"></i>
-				</div>
-				<div class="nav_item flex_column_center" :title="username">
+				<router-link to="/home" active-class="nav_item_active">
+					<div class="nav_item flex_column_center" title="首页">
+						<i class="iconfont icon-shouye"></i>
+					</div>
+				</router-link>
+				<router-link to="/video" active-class="nav_item_active">
+					<div class="nav_item flex_column_center" title="视频">
+						<i class="iconfont icon-ziyuan"></i>
+					</div>
+				</router-link>
+				<router-link to="/hot" active-class="nav_item_active">
+					<div class="nav_item flex_column_center" title="热门">
+						<i class="iconfont icon-remen1"></i>
+					</div>
+				</router-link>
+				<router-link to="/message" active-class="nav_item_active">
+					<div class="nav_item flex_column_center" title="消息">
+						<i class="iconfont icon-xinxi_huaban"></i>
+					</div>
+				</router-link>
+				<div class="nav_item flex_column_center" :title="username" @click="toUserCenter">
 					<div v-if="header" class="icon_header">
 						<img :src="header" :alt="username">
 					</div>
@@ -86,6 +94,9 @@
 	import ModeBtn from '@/components/public/modeBtn.vue'
 	import { useStore } from '@/store'
 	import { message } from 'ant-design-vue'
+	import {
+		useRouter
+	} from "vue-router";
 	message.config({
 		top: '300px'
 	})
@@ -93,7 +104,9 @@
 		name: 'NavHeader',
 		setup() {
 			const store = useStore()
+			const router = useRouter()
 			const username = computed(() => store.state.userModule.userInfo.username)
+			const userId = computed(() => store.state.userModule.userInfo.id)
 			const header = computed(() => store.state.userModule.userInfo.header)
 			let seachValue: Ref<string> = ref('');
 			
@@ -109,13 +122,24 @@
 					message.success("退出成功")
 				})
 			}
+			// 前往个人中心
+			const toUserCenter = () => {
+				if(userId.value) {
+					router.push({
+						path: "/user/"+ userId.value
+					})
+				} else {
+					router.push('/login')
+				}
+			}
 			
 			return {
 				seachValue,
 				changeSearch,
 				username,
 				header,
-				logOut
+				logOut,
+				toUserCenter
 			}
 		},
 		components: {
